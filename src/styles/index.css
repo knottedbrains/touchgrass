@@ -147,7 +147,7 @@ body, .app {
 /* Compact header and bar styles for consistency */
 .dashboard-header {
   background: var(--color-bg-alt);
-  border-bottom: 1.5px solid #d1d5db !important;
+  border-bottom: 1px solid #d1d5db !important;
   padding: 12px 32px !important;
   min-height: 44px !important;
   box-shadow: 0 1px 2px rgba(0,0,0,0.02);
@@ -214,7 +214,7 @@ body, .app {
   max-width: 400px;
   animation: fadeIn 0.5s ease-in-out;
   transition: background 0.3s;
-  border: 1.5px solid #d1d5db;
+  border: 1px solid #d1d5db;
 }
 @keyframes fadeIn {
   from {
@@ -337,7 +337,7 @@ body, .app {
   max-width: 420px;
   margin-top: 48px;
   transition: background 0.3s, color 0.3s;
-  border: 1.5px solid var(--color-green-light);
+  border: 1px solid var(--color-green-light);
 }
 .empty-state h2 {
   font-size: 1.5rem;
@@ -363,7 +363,7 @@ body, .app {
 .repo-input {
   padding: 12px 16px;
   border-radius: 8px;
-  border: 1.5px solid #d1d5db;
+  border: 1px solid #d1d5db;
   background: var(--color-input-bg);
   color: var(--color-text);
   font-size: 1rem;
@@ -415,7 +415,7 @@ body, .app {
   display: flex;
   align-items: center;
   transition: box-shadow 0.2s, transform 0.2s, background 0.3s;
-  border: 1.5px solid #d1d5db;
+  border: 1px solid #d1d5db;
 }
 .project-card.clickable:hover {
   border: 1.5px solid var(--color-accent);
@@ -475,7 +475,7 @@ body, .app {
 /* Project workspace and agent bar */
 .agent-bar {
   background: var(--color-bg-alt);
-  border-top: 1.5px solid #d1d5db !important;
+  border-top: 1px solid #d1d5db !important;
   display: flex;
   align-items: center;
   padding: 0 20px !important;
@@ -502,17 +502,19 @@ body, .app {
   color: var(--color-accent) !important;
 }
 .agent-tab.add-agent {
-  background: var(--color-accent) !important;
-  color: #fff !important;
+  background: none !important;
+  color: var(--color-accent) !important;
   border: none !important;
+  box-shadow: none !important;
 }
 .agent-tab.add-agent:hover {
-  background: var(--color-accent-hover) !important;
+  background: none !important;
+  color: var(--color-accent) !important;
 } 
 
 /* Card and preview styles */
 .agent-preview-card, .agent-full-preview, .login-card, .empty-state {
-  border: 1.5px solid #d1d5db !important;
+  border: 1px solid #d1d5db !important;
   box-shadow: 0 2px 8px rgba(0,0,0,0.02) !important;
   background: var(--color-card);
   border-radius: 18px !important;

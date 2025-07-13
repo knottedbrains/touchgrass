@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../App'
-import { LogOut, Trash } from 'lucide-react'
+import { LogOut, Trash, FolderOpen } from 'lucide-react'
 
 interface DashboardPageProps {
   onLogout: () => void
@@ -148,9 +148,9 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                     style={{ cursor: 'pointer', position: 'relative' }}
                   >
                     <div className="project-info">
-                      <div className="project-icon">📁</div>
+                      <div className="project-icon"><FolderOpen size={28} color="var(--color-accent)" /></div>
                       <div>
-                        <div className="project-name">{project.name}</div>
+                        <div className="project-name">{project.name.replace(/^[^/]+\//, '').replace(/\.git$/, '')}</div>
                         <a className="project-link" href={project.repoUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
                           {project.repoUrl}
                         </a>

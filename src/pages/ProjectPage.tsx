@@ -141,10 +141,11 @@ const ProjectPage: React.FC = () => {
             boxShadow: 'none',
             transition: 'color 0.2s',
             padding: 0,
+            outline: 'none',
           }}
           title="Add agent"
         >
-          <Plus size={44} strokeWidth={2.2} />
+          <Plus size={44} strokeWidth={2.2} color="var(--color-accent)" />
         </button>
       </nav>
     </div>
