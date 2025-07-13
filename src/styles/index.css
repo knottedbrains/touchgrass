@@ -96,9 +96,9 @@
   --color-bg-alt: #fff;
   --color-text: #23272f;
   --color-text-muted: #6b7280;
-  --color-accent: #e85a8a; /* petal pink */
-  --color-accent-hover: #c93c6d; /* deeper petal pink */
-  --color-accent-light: #f9c7d9; /* lightest petal pink */
+  --color-accent: #6ea16e; /* main green */
+  --color-accent-hover: #4e7c4e; /* deeper green */
+  --color-accent-light: #b7d7b7; /* lightest green */
   --color-green: #6ea16e; /* stem green */
   --color-green-light: #b7d7b7; /* light green */
   --color-border: #e5e7eb;
@@ -108,16 +108,16 @@
   --color-input-border: #b7d7b7;
   --color-error-bg: #fdf2f8;
   --color-error-text: #be185d;
-  --color-error-border: #e85a8a;
+  --color-error-border: #6ea16e;
 }
 .dark {
   --color-bg: #23272f;
   --color-bg-alt: #2d333b;
   --color-text: #f3f4f6;
   --color-text-muted: #b0b8c1;
-  --color-accent: #e85a8a;
-  --color-accent-hover: #c93c6d;
-  --color-accent-light: #3a1e2a;
+  --color-accent: #6ea16e;
+  --color-accent-hover: #4e7c4e;
+  --color-accent-light: #3a4d3a;
   --color-green: #6ea16e;
   --color-green-light: #3a4d3a;
   --color-border: #3a4d3a;
