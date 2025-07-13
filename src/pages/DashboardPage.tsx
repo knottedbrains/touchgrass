@@ -72,20 +72,9 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
     <div className="dashboard-container" style={{
       minHeight: '100vh',
       minWidth: '100vw',
-      background: `url(${gardenBg}) center center / cover no-repeat`,
       position: 'relative',
       overflow: 'hidden',
     }}>
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        background: 'rgba(255,255,255,0.7)',
-        zIndex: 0,
-        pointerEvents: 'none',
-      }} />
       <div style={{ position: 'relative', zIndex: 1 }}>
         <header className="dashboard-header" style={{
           background: 'transparent',
@@ -98,8 +87,8 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
           zIndex: 10,
         }}>
           <div className="header-content" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', background: 'none', boxShadow: 'none', border: 'none' }}>
-            <h1 className="touchgrass-logo" style={{ margin: 0, fontWeight: 700, fontSize: 24, display: 'flex', alignItems: 'center', gap: 8, background: 'none' }}>
-              touchgrass
+            <h1 className="touchgrass-logo" style={{ margin: 0, fontWeight: 700, fontSize: 24, display: 'flex', alignItems: 'center', gap: 8, background: 'none', color: '#fff' }}>
+              🌱touchgrass
             </h1>
           </div>
         </header>
@@ -145,10 +134,11 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                   margin: '48px 0 12px 0',
                   textAlign: 'center',
                   letterSpacing: '-0.01em',
+                  color: '#fff',
                 }}>
                   Welcome
                 </h2>
-                <div style={{ color: 'var(--color-text-muted)', fontSize: 15, marginBottom: 28 }}>
+                <div style={{ color: '#E7DCC9', fontSize: 15, marginBottom: 28 }}>
                   you have no projects yet. 
                   import your github project & continue building from your phone
                 </div>
@@ -162,26 +152,26 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                     required
                     style={{ border: '1.5px solid #d1d5db', background: 'var(--color-input-bg)', color: 'var(--color-text)' }}
                   />
-                  <button type="submit" className="repo-add-btn">Start Touching Grass</button>
+                  <button type="submit" className="repo-add-btn" style={{ color: '#23272f' }}>Clone</button>
                 </form>
                 {error && <div className="error-message">{error}</div>}
               </div>
             ) : (
               <>
-                <div className="projects-list-header">
-                  <h2>Your Projects</h2>
-                  <form className="repo-form-inline" onSubmit={handleAddProject}>
-                    <input
-                      type="url"
-                      className="repo-input"
-                      placeholder="https://github.com/username/repo"
-                      value={repoUrl}
-                      onChange={e => setRepoUrl(e.target.value)}
-                      required
-                    />
-                    <button type="submit" className="repo-add-btn">Start Touching Grass</button>
-                  </form>
-                </div>
+                <div style={{ marginTop: 56 }} />
+                <form className="repo-form-inline" onSubmit={handleAddProject}>
+                  <input
+                    type="url"
+                    className="repo-input"
+                    placeholder="https://github.com/username/repo"
+                    value={repoUrl}
+                    onChange={e => setRepoUrl(e.target.value)}
+                    required
+                  />
+                  <button type="submit" className="repo-add-btn">Clone</button>
+                </form>
+                <style>{`.repo-add-btn { color: #23272f !important; }`}</style>
+                <h2 style={{ margin: '32px 0 12px 0', fontWeight: 700, fontSize: 22, textAlign: 'left' }}>Your Projects</h2>
                 <div className="projects-grid">
                   {projects.map(project => (
                     <div

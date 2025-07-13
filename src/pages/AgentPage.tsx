@@ -215,7 +215,7 @@ const AgentPage: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: 32,
+            fontSize: 24,
             margin: 0,
             cursor: 'pointer',
             boxShadow: 'none',
@@ -225,7 +225,7 @@ const AgentPage: React.FC = () => {
           }}
           title="Terminal"
         >
-          <SquareTerminal size={32} strokeWidth={2.2} color="var(--color-accent)" />
+          <SquareTerminal size={24} strokeWidth={1.6} color="var(--color-accent)" />
         </button>
         <button
           className="agent-tab bring-to-front"
@@ -239,7 +239,7 @@ const AgentPage: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: 32,
+            fontSize: 24,
             margin: 0,
             cursor: 'pointer',
             boxShadow: 'none',
@@ -250,7 +250,7 @@ const AgentPage: React.FC = () => {
           title="Back to project workspace"
           onClick={() => navigate(`/project/${projectId}`)}
         >
-          <BringToFront size={32} strokeWidth={2.2} color="var(--color-accent)" />
+          <BringToFront size={24} strokeWidth={1.6} color="var(--color-accent)" />
         </button>
       </nav>
     </div>
