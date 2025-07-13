@@ -361,19 +361,8 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
          }} />
          <div className="bottom-nav">
            <div className={`bottom-nav__item${activeTab === 'projects' ? ' bottom-nav__item--active' : ''}`} onClick={() => setActiveTab('projects')} tabIndex={0} role="button">
-             <FolderOpen className="bottom-nav__icon" size={18} color="#E7DCC9" strokeWidth={1.7} />
-             <span className="bottom-nav__label">Projects</span>
-           </div>
-           <div className={`bottom-nav__item${activeTab === 'agents' ? ' bottom-nav__item--active' : ''}`} onClick={() => {
-             const valid = projects.find(p => p.id === lastProjectId)
-             if (lastProjectId && valid) {
-               navigate(`/project/${lastProjectId}`)
-             } else {
-               // Optionally show a toast or message: "No recent project found"
-             }
-           }} tabIndex={0} role="button">
              <Flower2 className="bottom-nav__icon" size={18} color="#E7DCC9" strokeWidth={1.7} />
-             <span className="bottom-nav__label">Agents</span>
+             <span className="bottom-nav__label">Projects</span>
            </div>
            <div className={`bottom-nav__item${activeTab === 'account' ? ' bottom-nav__item--active' : ''}`} onClick={() => setActiveTab('account')} tabIndex={0} role="button">
              <CircleUserRound className="bottom-nav__icon" size={18} color="#E7DCC9" strokeWidth={1.7} />
