@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTheme } from '../App'
-import { ArrowLeft, Plus, List, LayoutGrid } from 'lucide-react'
+import { Plus, House } from 'lucide-react'
 
 interface Agent {
   id: string
@@ -57,14 +57,6 @@ const ProjectPage: React.FC = () => {
 
   return (
     <div className="project-workspace" style={{ minHeight: '100vh', background: 'var(--color-bg)' }}>
-      <header className="dashboard-header">
-        <div className="header-content">
-          <button onClick={() => navigate('/dashboard')} className="logout-button" style={{ marginRight: 10, width: 32, height: 32, borderRadius: '50%', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18 }} title="Back to dashboard">
-            <ArrowLeft size={18} color="var(--color-accent)" />
-          </button>
-          <h1 style={{ flex: 1 }}>{project.name}</h1>
-        </div>
-      </header>
       <main className="workspace-main" style={{ paddingBottom: 80, paddingTop: 24, paddingLeft: 40, paddingRight: 40 }}>
         <div className="agents-grid" style={{
           display: 'grid',
@@ -95,14 +87,23 @@ const ProjectPage: React.FC = () => {
               tabIndex={0}
               role="button"
             >
-              <div style={{ padding: '12px 18px', borderBottom: '1px solid var(--color-border)', fontWeight: 600, color: 'var(--color-accent)', fontSize: 18 }}>
+              <div style={{
+                padding: '4px 12px',
+                borderBottom: '1px solid var(--color-border)',
+                fontWeight: 600,
+                color: 'var(--color-accent)',
+                fontSize: 13,
+                minHeight: 0,
+                lineHeight: 1.2,
+                background: 'var(--color-card)',
+              }}>
                 {agent.name}
               </div>
               <div style={{ flex: 1, minHeight: 180, background: 'var(--color-bg)' }}>
                 <iframe
                   src={getReadmeUrl(project.repoUrl)}
                   title={`Preview for ${agent.name}`}
-                  style={{ width: '100%', height: '100%', border: 'none', background: 'var(--color-card)' }}
+                  style={{ width: '100%', height: '100%', border: 'none', background: 'var(--color-card)', pointerEvents: 'none' }}
                 />
               </div>
             </div>
@@ -118,7 +119,7 @@ const ProjectPage: React.FC = () => {
         borderTop: '1px solid var(--color-border)',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         padding: '0 16px',
         height: 48,
         zIndex: 50,
@@ -144,13 +145,16 @@ const ProjectPage: React.FC = () => {
             transition: 'color 0.2s',
             padding: 0,
             outline: 'none',
+            position: 'absolute',
+            left: 16,
           }}
           title="Add agent"
         >
           <Plus size={28} strokeWidth={2.2} color="var(--color-accent)" />
         </button>
         <button
-          className="agent-tab tab-switcher"
+          className="agent-tab home-btn"
+          onClick={() => navigate('/dashboard')}
           style={{
             background: 'none',
             color: 'var(--color-accent)',
@@ -169,34 +173,37 @@ const ProjectPage: React.FC = () => {
             padding: 0,
             outline: 'none',
           }}
-          title="Switch agent tab"
+          title="Go to dashboard"
         >
-          <List size={28} strokeWidth={2.2} color="var(--color-accent)" />
+          <House size={28} strokeWidth={2.2} color="var(--color-accent)" />
         </button>
         <button
-          className="agent-tab grid-toggle"
-          onClick={() => setShowGrid(g => !g)}
+          className="agent-tab done-btn"
+          onClick={() => navigate(`/project/${projectId}/agent/${selectedAgent}`)}
           style={{
             background: 'none',
             color: 'var(--color-accent)',
             border: 'none',
             borderRadius: 0,
-            width: 40,
-            height: 40,
+            width: 56,
+            height: 48,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: 28,
+            fontSize: 20,
+            fontWeight: 700,
             margin: 0,
             cursor: 'pointer',
             boxShadow: 'none',
             transition: 'color 0.2s',
             padding: 0,
             outline: 'none',
+            position: 'absolute',
+            right: 16,
           }}
-          title="Toggle agent grid/single view"
+          title="Done"
         >
-          <LayoutGrid size={28} strokeWidth={2.2} color="var(--color-accent)" />
+          Done
         </button>
       </nav>
     </div>

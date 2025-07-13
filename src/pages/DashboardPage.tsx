@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../App'
 import { LogOut, Trash, FolderOpen } from 'lucide-react'
+import gardenBg from '../assets/garden-bg.jpg'
 
 interface DashboardPageProps {
   onLogout: () => void
@@ -68,64 +69,60 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
   }
 
   return (
-    <div className="dashboard-container">
-      <header className="dashboard-header">
-        <div className="header-content" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-          <button
-            className="circle-icon-btn"
-            onClick={toggleTheme}
-            title="Toggle light/dark mode"
-            style={{ position: 'absolute', left: 0 }}
-          >
-            {theme === 'dark' ? '🌞' : '🌙'}
-          </button>
-          <h1 style={{ margin: 0, fontWeight: 700, fontSize: 24, display: 'flex', alignItems: 'center', gap: 8 }}>
-            🌱touchgrass
-          </h1>
-          <button
-            className="circle-icon-btn"
-            onClick={onLogout}
-            title="Logout"
-            style={{ position: 'absolute', right: 0 }}
-          >
-            <LogOut size={18} color="var(--color-accent)" />
-          </button>
-        </div>
-      </header>
-      <main className="dashboard-main">
-        <div className="dashboard-content">
-          {projects.length === 0 ? (
-            <div className="empty-state" style={{
-              maxWidth: 420,
-              margin: '80px auto 0 auto',
-              textAlign: 'center',
-              background: 'none',
-              border: 'none',
-              boxShadow: 'none',
-              padding: 0
-            }}>
-              <h2 style={{ fontWeight: 800, fontSize: 32, marginBottom: 10 }}>Welcome</h2>
-              <div style={{ color: 'var(--color-text-muted)', fontSize: 18, marginBottom: 8 }}>You have no projects yet.</div>
-              <div style={{ color: 'var(--color-text-muted)', fontSize: 15, marginBottom: 28 }}>Please import your project from GitHub so that the agents can start working on it.</div>
-              <form className="repo-form" onSubmit={handleAddProject}>
-                <input
-                  type="url"
-                  className="repo-input"
-                  placeholder="https://github.com/username/repo"
-                  value={repoUrl}
-                  onChange={e => setRepoUrl(e.target.value)}
-                  required
-                  style={{ border: '1.5px solid #d1d5db', background: 'var(--color-input-bg)', color: 'var(--color-text)' }}
-                />
-                <button type="submit" className="repo-add-btn">Open Project</button>
-              </form>
-              {error && <div className="error-message">{error}</div>}
-            </div>
-          ) : (
-            <>
-              <div className="projects-list-header">
-                <h2>Your Projects</h2>
-                <form className="repo-form-inline" onSubmit={handleAddProject}>
+    <div className="dashboard-container" style={{
+      minHeight: '100vh',
+      minWidth: '100vw',
+      background: `url(${gardenBg}) center center / cover no-repeat`,
+      position: 'relative',
+      overflow: 'hidden',
+    }}>
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        background: 'rgba(255,255,255,0.7)',
+        zIndex: 0,
+        pointerEvents: 'none',
+      }} />
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <header className="dashboard-header">
+          <div className="header-content" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+            <button
+              className="circle-icon-btn"
+              onClick={toggleTheme}
+              title="Toggle light/dark mode"
+              style={{ position: 'absolute', left: 0 }}
+            >
+              {theme === 'dark' ? '🌞' : '🌙'}
+            </button>
+            <h1 style={{ margin: 0, fontWeight: 700, fontSize: 24, display: 'flex', alignItems: 'center', gap: 8 }}>
+              🌱touchgrass
+            </h1>
+            <button
+              className="circle-icon-btn"
+              onClick={onLogout}
+              title="Logout"
+              style={{ position: 'absolute', right: 0 }}
+            >
+              <LogOut size={18} color="var(--color-accent)" />
+            </button>
+          </div>
+        </header>
+        <main className="dashboard-main">
+          <div className="dashboard-content">
+            {projects.length === 0 ? (
+              <div style={{
+                maxWidth: 420,
+                margin: '80px auto 0 auto',
+                textAlign: 'center',
+                padding: 0
+              }}>
+                <h2 style={{ fontWeight: 800, fontSize: 32, marginBottom: 10 }}>Welcome</h2>
+                <div style={{ color: 'var(--color-text-muted)', fontSize: 18, marginBottom: 8 }}>You have no projects yet.</div>
+                <div style={{ color: 'var(--color-text-muted)', fontSize: 15, marginBottom: 28 }}>Please import your project from GitHub so that the agents can start working on it.</div>
+                <form className="repo-form" onSubmit={handleAddProject}>
                   <input
                     type="url"
                     className="repo-input"
@@ -133,66 +130,85 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                     value={repoUrl}
                     onChange={e => setRepoUrl(e.target.value)}
                     required
+                    style={{ border: '1.5px solid #d1d5db', background: 'var(--color-input-bg)', color: 'var(--color-text)' }}
                   />
                   <button type="submit" className="repo-add-btn">Open Project</button>
                 </form>
+                {error && <div className="error-message">{error}</div>}
               </div>
-              <div className="projects-grid">
-                {projects.map(project => (
-                  <div
-                    className="project-card clickable"
-                    key={project.id}
-                    onClick={() => handleProjectClick(project.id)}
-                    tabIndex={0}
-                    role="button"
-                    style={{ cursor: 'pointer', position: 'relative' }}
-                  >
-                    <div className="project-info">
-                      <div className="project-icon"><FolderOpen size={28} color="var(--color-accent)" /></div>
-                      <div>
-                        <div className="project-name">{project.name.replace(/^[^/]+\//, '').replace(/\.git$/, '')}</div>
-                        <a className="project-link" href={project.repoUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
-                          {project.repoUrl}
-                        </a>
-                      </div>
-                    </div>
-                    <button
-                      onClick={(e) => handleDeleteProject(e, project.id)}
-                      style={{
-                        position: 'absolute',
-                        top: 12,
-                        right: 12,
-                        background: 'none',
-                        border: 'none',
-                        color: 'var(--color-text-muted)',
-                        cursor: 'pointer',
-                        padding: 6,
-                        borderRadius: '50%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        transition: 'all 0.2s',
-                        opacity: 0.6,
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.opacity = '1'
-                        e.currentTarget.style.color = 'var(--color-accent)'
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.opacity = '0.6'
-                        e.currentTarget.style.color = 'var(--color-text-muted)'
-                      }}
-                      title="Delete project"
+            ) : (
+              <>
+                <div className="projects-list-header">
+                  <h2>Your Projects</h2>
+                  <form className="repo-form-inline" onSubmit={handleAddProject}>
+                    <input
+                      type="url"
+                      className="repo-input"
+                      placeholder="https://github.com/username/repo"
+                      value={repoUrl}
+                      onChange={e => setRepoUrl(e.target.value)}
+                      required
+                    />
+                    <button type="submit" className="repo-add-btn">Open Project</button>
+                  </form>
+                </div>
+                <div className="projects-grid">
+                  {projects.map(project => (
+                    <div
+                      className="project-card clickable"
+                      key={project.id}
+                      onClick={() => handleProjectClick(project.id)}
+                      tabIndex={0}
+                      role="button"
+                      style={{ cursor: 'pointer', position: 'relative' }}
                     >
-                      <Trash size={16} />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-        </div>
-      </main>
+                      <div className="project-info">
+                        <div className="project-icon"><FolderOpen size={28} color="var(--color-accent)" /></div>
+                        <div>
+                          <div className="project-name">{project.name.replace(/^[^/]+\//, '').replace(/\.git$/, '')}</div>
+                          <a className="project-link" href={project.repoUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
+                            {project.repoUrl}
+                          </a>
+                        </div>
+                      </div>
+                      <button
+                        onClick={(e) => handleDeleteProject(e, project.id)}
+                        style={{
+                          position: 'absolute',
+                          top: 12,
+                          right: 12,
+                          background: 'none',
+                          border: 'none',
+                          color: 'var(--color-text-muted)',
+                          cursor: 'pointer',
+                          padding: 6,
+                          borderRadius: '50%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          transition: 'all 0.2s',
+                          opacity: 0.6,
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.opacity = '1'
+                          e.currentTarget.style.color = 'var(--color-accent)'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.opacity = '0.6'
+                          e.currentTarget.style.color = 'var(--color-text-muted)'
+                        }}
+                        title="Delete project"
+                      >
+                        <Trash size={16} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </main>
+      </div>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTheme } from '../App'
-import { Plus, House } from 'lucide-react'
+import { GalleryVerticalEnd, SquareTerminal, Mic, BringToFront } from 'lucide-react'
 
 interface Agent {
   id: string
@@ -17,6 +17,7 @@ const AgentPage: React.FC = () => {
   const { projectId, agentId } = useParams()
   const navigate = useNavigate()
   const { theme } = useTheme()
+  const [showTerminal, setShowTerminal] = useState(false)
 
   const [project] = useState(() => {
     const allProjects = JSON.parse(localStorage.getItem('projects') || '[]')
@@ -77,66 +78,133 @@ const AgentPage: React.FC = () => {
           position: 'fixed',
           left: 0,
           right: 0,
-          bottom: 48,
-          background: 'var(--color-bg-alt)',
-          borderTop: '1px solid #ededed',
+          bottom: 56, // height of nav bar
+          background: theme === 'dark' ? '#23272f' : '#f3f4f6',
+          border: 'none',
           display: 'flex',
           alignItems: 'center',
-          padding: '10px 20px',
+          padding: '0 18px',
           zIndex: 20,
-          boxShadow: '0 -1px 2px rgba(0,0,0,0.02)'
+          boxShadow: 'none',
+          height: 44,
+          borderRadius: 16,
+          width: '92vw',
+          maxWidth: 600,
+          margin: '0 auto',
+          transform: 'translateX(0)',
+          color: theme === 'dark' ? '#fff' : '#23272f',
         }}
       >
         <input
           type="text"
           value={chatInput}
           onChange={e => setChatInput(e.target.value)}
-          placeholder="Chat with your agent..."
+          placeholder="Chat with your agent"
           style={{
             flex: 1,
-            border: '1px solid #ededed',
-            borderRadius: 8,
-            padding: '10px 14px',
-            fontSize: 15,
-            marginRight: 12,
-            background: 'var(--color-input-bg)',
-            color: 'var(--color-text)',
+            border: 'none', // absolutely no border
+            borderRadius: 0, // no border radius for input itself
+            padding: '10px 0',
+            fontSize: 17,
+            background: 'transparent',
+            color: theme === 'dark' ? '#fff' : '#23272f',
             outline: 'none',
+            boxShadow: 'none',
+            minWidth: 0,
+            fontWeight: 500,
+            letterSpacing: 0.1,
           }}
+          autoFocus
+          inputMode="text"
         />
         <button
           type="submit"
           style={{
-            background: 'var(--color-accent)',
-            color: '#fff',
+            background: 'none',
             border: 'none',
-            borderRadius: 8,
-            padding: '10px 20px',
-            fontWeight: 600,
-            fontSize: 15,
+            borderRadius: '50%',
+            width: 36,
+            height: 36,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginLeft: 8,
+            color: theme === 'dark' ? '#fff' : '#23272f',
+            opacity: 1,
             cursor: 'pointer',
             boxShadow: 'none',
             transition: 'background 0.2s',
+            fontSize: 22,
+            outline: 'none',
+            alignSelf: 'flex-end',
           }}
-        >Send</button>
+          aria-label="Send voice message"
+        >
+          <Mic size={22} color={theme === 'dark' ? '#fff' : '#23272f'} />
+        </button>
       </form>
+      {/* Terminal Bottom Sheet Modal */}
+      {showTerminal && (
+        <div
+          style={{
+            position: 'fixed',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: '52vh',
+            background: theme === 'dark' ? '#181c1f' : '#fff',
+            color: theme === 'dark' ? '#fff' : '#23272f',
+            borderTopLeftRadius: 18,
+            borderTopRightRadius: 18,
+            boxShadow: '0 -4px 24px rgba(0,0,0,0.18)',
+            zIndex: 100,
+            display: 'flex',
+            flexDirection: 'column',
+            animation: 'slideUp 0.25s cubic-bezier(.4,1.4,.6,1)',
+            border: 'none',
+          }}
+        >
+          <div style={{ padding: '18px 20px 0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span style={{ fontWeight: 700, fontSize: 18 }}>Code Editor</span>
+            <button
+              onClick={() => setShowTerminal(false)}
+              style={{
+                background: 'var(--color-accent)',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 8,
+                padding: '8px 18px',
+                fontWeight: 600,
+                fontSize: 15,
+                cursor: 'pointer',
+                boxShadow: 'none',
+                marginLeft: 12,
+              }}
+            >Done</button>
+          </div>
+          <div style={{ flex: 1, padding: '24px 20px', overflowY: 'auto', fontFamily: 'monospace', fontSize: 15, background: theme === 'dark' ? 'rgba(0,0,0,0.10)' : '#f3f4f6', borderRadius: 12, margin: 20 }}>
+            {/* Placeholder for code changes */}
+            Code Editor - See agent changes here
+          </div>
+        </div>
+      )}
       <nav className="agent-bar" style={{
         position: 'fixed',
         left: 0,
         right: 0,
         bottom: 0,
         background: 'var(--color-bg-alt)',
-        borderTop: '1px solid var(--color-border)',
+        borderTop: 'none',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         padding: '0 24px',
         height: 56,
         zIndex: 30,
         boxShadow: 'none',
       }}>
         <button
-          className="agent-tab add-agent"
+          className="agent-tab terminal-toggle"
           style={{
             background: 'none',
             color: 'var(--color-accent)',
@@ -147,7 +215,7 @@ const AgentPage: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: 40,
+            fontSize: 32,
             margin: 0,
             cursor: 'pointer',
             boxShadow: 'none',
@@ -155,12 +223,12 @@ const AgentPage: React.FC = () => {
             padding: 0,
             outline: 'none',
           }}
-          title="Add agent"
+          title="Terminal"
         >
-          <Plus size={40} strokeWidth={2.2} color="var(--color-accent)" />
+          <SquareTerminal size={32} strokeWidth={2.2} color="var(--color-accent)" />
         </button>
         <button
-          className="agent-tab home-btn"
+          className="agent-tab bring-to-front"
           style={{
             background: 'none',
             color: 'var(--color-accent)',
@@ -171,7 +239,7 @@ const AgentPage: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: 40,
+            fontSize: 32,
             margin: 0,
             cursor: 'pointer',
             boxShadow: 'none',
@@ -179,36 +247,10 @@ const AgentPage: React.FC = () => {
             padding: 0,
             outline: 'none',
           }}
-          title="Go to dashboard"
-          onClick={() => navigate('/dashboard')}
+          title="Back to project workspace"
+          onClick={() => navigate(`/project/${projectId}`)}
         >
-          <House size={40} strokeWidth={2.2} color="var(--color-accent)" />
-        </button>
-        <button
-          className="agent-tab done-btn"
-          style={{
-            background: 'none',
-            color: 'var(--color-accent)',
-            border: 'none',
-            borderRadius: 0,
-            width: 56,
-            height: 56,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 22,
-            fontWeight: 700,
-            margin: 0,
-            cursor: 'pointer',
-            boxShadow: 'none',
-            transition: 'color 0.2s',
-            padding: 0,
-            outline: 'none',
-            letterSpacing: '0.5px',
-          }}
-          title="Done"
-        >
-          Done
+          <BringToFront size={32} strokeWidth={2.2} color="var(--color-accent)" />
         </button>
       </nav>
     </div>

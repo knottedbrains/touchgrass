@@ -44,29 +44,6 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
       position: 'relative',
       overflow: 'hidden',
     }}>
-      <button
-        onClick={toggleTheme}
-        title="Toggle light/dark mode"
-        style={{
-          position: 'absolute',
-          top: 24,
-          right: 32,
-          zIndex: 2,
-          background: 'none',
-          border: 'none',
-          borderRadius: '50%',
-          width: 40,
-          height: 40,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 24,
-          color: 'var(--color-green)',
-          cursor: 'pointer',
-        }}
-      >
-        {theme === 'dark' ? '🌞' : '🌙'}
-      </button>
       <div style={{
         position: 'absolute',
         top: 0,
@@ -81,12 +58,12 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 18 }}>
           <span style={{ fontSize: 38, marginBottom: 2 }}>🌱</span>
         </div>
-        <h1 style={{ fontWeight: 800, fontSize: 32, marginBottom: 10, color: 'var(--color-text)' }}>{mode === 'login' ? 'Log in' : 'Sign Up'}</h1>
-        <p style={{ color: 'var(--color-text-muted)', fontSize: 18, marginBottom: 32 }}>{mode === 'login' ? 'Go touch grass.' : 'Continue touching grass.'}</p>
+        <h1 style={{ fontWeight: 800, fontSize: 32, marginBottom: 10, color: '#23272f' }}>{mode === 'login' ? 'Log in' : 'Sign Up'}</h1>
+        <p style={{ color: '#23272f', fontSize: 18, marginBottom: 32 }}>{mode === 'login' ? 'Continue touching grass.' : 'Come touch grass.'}</p>
         <form onSubmit={handleSubmit} style={{ width: '100%', maxWidth: 400, display: 'flex', flexDirection: 'column', gap: 18, background: 'none', boxShadow: 'none', border: 'none', padding: 0 }}>
           {error && <div className="error-message">{error}</div>}
           <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <label htmlFor="email" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: 2 }}>Email</label>
+            <label htmlFor="email" style={{ fontWeight: 600, color: '#23272f', marginBottom: 2 }}>Email</label>
             <input
               type="email"
               id="email"
@@ -97,16 +74,19 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               style={{
                 padding: '12px 16px',
                 borderRadius: 8,
-                border: '1px solid #d1d5db',
-                background: 'var(--color-input-bg)',
-                color: 'var(--color-text)',
+                border: '1px solid #d1e7d1',
+                background: '#fff',
+                color: '#23272f',
                 fontSize: 16,
                 outline: 'none',
+                transition: 'border-color 0.2s',
               }}
+              onFocus={e => e.currentTarget.style.borderColor = '#b7d7b7'}
+              onBlur={e => e.currentTarget.style.borderColor = '#d1e7d1'}
             />
           </div>
           <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <label htmlFor="password" style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: 2 }}>Password</label>
+            <label htmlFor="password" style={{ fontWeight: 600, color: '#23272f', marginBottom: 2 }}>Password</label>
             <input
               type="password"
               id="password"
@@ -117,12 +97,15 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               style={{
                 padding: '12px 16px',
                 borderRadius: 8,
-                border: '1px solid #d1d5db',
-                background: 'var(--color-input-bg)',
-                color: 'var(--color-text)',
+                border: '1px solid #d1e7d1',
+                background: '#fff',
+                color: '#23272f',
                 fontSize: 16,
                 outline: 'none',
+                transition: 'border-color 0.2s',
               }}
+              onFocus={e => e.currentTarget.style.borderColor = '#b7d7b7'}
+              onBlur={e => e.currentTarget.style.borderColor = '#d1e7d1'}
             />
           </div>
           <button type="submit" style={{
@@ -141,24 +124,24 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             {mode === 'login' ? 'Sign In' : 'Register'}
           </button>
         </form>
-        <div style={{ marginTop: 24, color: 'var(--color-text-muted)', fontSize: 15 }}>
+        <div style={{ marginTop: 24, color: '#23272f', fontSize: 16, fontWeight: 500 }}>
           {mode === 'login' ? (
             <>
               Don&apos;t have an account?{' '}
-              <button type="button" style={{ color: 'var(--color-accent)', background: 'none', border: 'none', fontWeight: 600, cursor: 'pointer', textDecoration: 'underline', fontSize: 15 }} onClick={() => setMode('register')}>
+              <button type="button" style={{ color: '#6ea16e', background: 'none', border: 'none', fontWeight: 700, cursor: 'pointer', textDecoration: 'underline', fontSize: 16 }} onClick={() => setMode('register')}>
                 Sign up
               </button>
             </>
           ) : (
             <>
               Already have an account?{' '}
-              <button type="button" style={{ color: 'var(--color-accent)', background: 'none', border: 'none', fontWeight: 600, cursor: 'pointer', textDecoration: 'underline', fontSize: 15 }} onClick={() => setMode('login')}>
+              <button type="button" style={{ color: '#6ea16e', background: 'none', border: 'none', fontWeight: 700, cursor: 'pointer', textDecoration: 'underline', fontSize: 16 }} onClick={() => setMode('login')}>
                 Login
               </button>
             </>
           )}
         </div>
-        <div className="login-footer" style={{ marginTop: 32, color: 'var(--color-text-muted)', fontSize: 14 }}>
+        <div className="login-footer" style={{ marginTop: 32, color: '#23272f', fontSize: 15, fontWeight: 500 }}>
           Demo: Use any email and password to login
         </div>
       </div>
