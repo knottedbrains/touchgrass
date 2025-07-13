@@ -72,7 +72,7 @@ const AgentPage: React.FC = () => {
         </div>
       </div>
       {/* Divider bar above nav bar */}
-      <div className="bottom-nav-divider" />
+      {!showTerminal && <div className="bottom-nav-divider" />}
       <nav
         className="bottom-nav"
         style={{ background: '#1a211a', borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
@@ -148,7 +148,7 @@ const AgentPage: React.FC = () => {
               style={{ marginLeft: 12, fontWeight: 700, fontSize: 15, padding: '8px 18px', cursor: 'pointer' }}
             >Done</button>
           </div>
-          <div style={{ flex: 1, padding: '24px 20px', overflowY: 'auto', fontFamily: 'monospace', fontSize: 15, background: 'rgba(35,46,37,0.92)', borderRadius: 12, margin: 20, color: '#fff', border: 'none' }}>
+          <div style={{ flex: 1, padding: '24px 20px', overflowY: 'auto', fontFamily: 'Courier New, Courier, monospace', fontSize: 12, background: 'rgba(35,46,37,0.92)', borderRadius: 12, margin: 20, color: '#fff', border: 'none' }}>
             {/* Placeholder for code changes */}
             Code Editor - See agent changes here
           </div>
