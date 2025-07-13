@@ -100,6 +100,7 @@ const AgentPage: React.FC = () => {
             style={{
               background: 'none',
               border: 'none',
+              boxShadow: 'none',
               marginLeft: 8,
               display: 'flex',
               alignItems: 'center',
