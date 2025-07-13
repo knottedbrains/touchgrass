@@ -58,7 +58,7 @@ const AgentPage: React.FC = () => {
   return (
     <div className="project-workspace" style={{ minHeight: '100vh', background: 'var(--color-bg)', position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
       <iframe
-        src={getReadmeUrl(project.repoUrl)}
+        src={'http://35.239.67.204'}
         title={`Preview for ${agent?.name}`}
         style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh', border: 'none', background: 'var(--color-card)', zIndex: 1 }}
       />
@@ -98,7 +98,7 @@ const AgentPage: React.FC = () => {
           <button
             type="button"
             style={{
-              background: '#cbbfae',
+              background: 'none',
               border: 'none',
               marginLeft: 8,
               display: 'flex',

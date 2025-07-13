@@ -140,7 +140,7 @@ const ProjectPage: React.FC = () => {
               </div>
               <div style={{ flex: 1, minHeight: 180, background: 'var(--color-bg)' }}>
                 <iframe
-                  src={getReadmeUrl(project.repoUrl)}
+                  src={'http://35.239.67.204'}
                   title={`Preview for ${agent.name}`}
                   style={{ width: '100%', height: '100%', border: 'none', background: 'var(--color-card)', pointerEvents: 'none' }}
                 />
