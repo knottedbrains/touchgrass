@@ -92,10 +92,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
       minWidth: '100vw',
       position: 'relative',
       overflow: 'hidden',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
+      display: 'block',
     }}>
       <div style={{ position: 'relative', zIndex: 1 }}>
         <header className="dashboard-header" style={{
@@ -145,17 +142,13 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
           <LogOut size={18} color="var(--color-accent)" />
         </button>
         <main className="dashboard-main" style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
+          marginTop: 88, // 64px header + 24px extra
           width: '100%',
         }}>
           <div className="dashboard-content" style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
             width: '100%',
           }}>
             {activeTab === 'projects' && (
@@ -196,8 +189,10 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                 </div>
               ) : (
                 <>
-                  <div style={{ marginTop: 56 }} />
-                  <form className="repo-form-inline" onSubmit={handleAddProject}>
+                  <div style={{ maxWidth: 520, width: '100%', margin: '0 auto', textAlign: 'left', marginBottom: 8 }}>
+                    <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 22, margin: '0 0 6px 0', fontFamily: 'Cera Pro, sans-serif', letterSpacing: '0.01em', textAlign: 'left' }}>Import new project</h2>
+                  </div>
+                  <div style={{ maxWidth: 520, width: '100%', margin: '0 auto', display: 'flex', gap: 12, marginBottom: 10 }}>
                     <input
                       type="url"
                       className="repo-input"
@@ -205,13 +200,15 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                       value={repoUrl}
                       onChange={e => setRepoUrl(e.target.value)}
                       required
-                      style={{ fontFamily: 'Cera Pro, sans-serif' }}
+                      style={{ fontFamily: 'Cera Pro, sans-serif', flex: 1 }}
                     />
-                    <button type="submit" className="repo-add-btn">Clone</button>
-                  </form>
+                    <button type="submit" className="repo-add-btn" style={{ color: '#23272f', minWidth: 110, fontWeight: 700, fontSize: 18, padding: '0 18px' }}>Clone</button>
+                  </div>
                   <style>{`.repo-add-btn { color: #23272f !important; }`}</style>
-                  <h2 style={{ margin: '18px 0 6px 0', fontWeight: 700, fontSize: 22, textAlign: 'left' }}>Your Projects</h2>
-                  <div className="projects-grid" style={{ marginTop: 0 }}>
+                  <div style={{ maxWidth: 520, width: '100%', margin: '0 auto', textAlign: 'left', marginBottom: 4 }}>
+                    <h2 style={{ margin: '8px 0 4px 0', fontWeight: 700, fontSize: 22, color: '#fff', fontFamily: 'Cera Pro, sans-serif', letterSpacing: '0.01em', textAlign: 'left' }}>Your Projects</h2>
+                  </div>
+                  <div className="projects-grid" style={{ marginTop: 0, maxWidth: 520, width: '100%', gap: 12 }}>
                     {projects.map(project => (
                       <div
                         className="project-card clickable"

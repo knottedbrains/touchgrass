@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTheme } from '../App'
-import { GalleryVerticalEnd, SquareTerminal, Mic, BringToFront } from 'lucide-react'
+import { GalleryVerticalEnd, SquareTerminal, Mic, BringToFront, Trash2 } from 'lucide-react'
 
 interface Agent {
   id: string
@@ -24,13 +24,13 @@ const AgentPage: React.FC = () => {
     return allProjects.find((p: any) => String(p.id) === String(projectId)) || null
   })
 
-  const [agents] = useState<Agent[]>([
+  const [agents, setAgents] = useState<Agent[]>([
     { id: '1', name: 'Agent 1' },
     { id: '2', name: 'Agent 2' },
     { id: '3', name: 'Agent 3' },
     { id: '4', name: 'Agent 4' }
   ])
-  const [selectedAgent] = useState(agentId || '1')
+  const [selectedAgent, setSelectedAgent] = useState(agentId || '1')
   const [chatInput, setChatInput] = useState('')
   const [chatMessages, setChatMessages] = useState<{sender: string, text: string}[]>([])
 
@@ -72,8 +72,11 @@ const AgentPage: React.FC = () => {
         </div>
       </div>
       {/* Divider bar above nav bar */}
-      <div className="bottom-nav-divider" style={{ width: '100vw', height: '0.75px', background: 'rgba(231,220,201,0.5)', position: 'fixed', left: 0, bottom: 64, zIndex: 101 }} />
-      <nav className="bottom-nav" style={{ borderRadius: 0, background: 'rgba(26,33,26,0.85)', backdropFilter: 'blur(12px)', borderTop: '0.75px solid rgba(231,220,201,0.5)', borderLeft: 'none', borderRight: 'none', borderBottom: 'none', boxShadow: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 8px' }}>
+      <div className="bottom-nav-divider" />
+      <nav
+        className="bottom-nav"
+        style={{ background: '#1a211a', borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
+      >
         <div className="bottom-nav__item" style={{ flex: '0 0 56px', minWidth: 0 }} onClick={() => navigate(`/project/${projectId}`)} tabIndex={0} role="button">
           <BringToFront className="bottom-nav__icon" size={18} color="#E7DCC9" strokeWidth={1.7} />
           <span className="bottom-nav__label">Workspace</span>
@@ -81,45 +84,35 @@ const AgentPage: React.FC = () => {
         <form
           className="agent-chat-box"
           onSubmit={handleSend}
-          style={{
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            margin: '0 8px',
-            background: 'rgba(231,220,201,0.13)',
-            borderRadius: 18,
-            padding: '0 14px',
-            height: 36,
-            minWidth: 0,
-            boxShadow: 'none',
-            border: 'none',
-            fontFamily: 'Cera Pro, sans-serif',
-            borderTop: 'none',
-            maxWidth: '100%',
-          }}
+          style={{ flex: 1, margin: '0 8px', maxWidth: '100%', display: 'flex', alignItems: 'center', borderRadius: 999, background: 'rgba(231,220,201,0.13)', minWidth: 0 }}
         >
           <input
             type="text"
             value={chatInput}
             onChange={e => setChatInput(e.target.value)}
             placeholder="Chat with your agent"
-            style={{
-              flex: 1,
-              border: 'none',
-              borderRadius: 18,
-              padding: '8px 0',
-              fontSize: 13,
-              background: 'transparent',
-              color: '#232e25',
-              outline: 'none',
-              boxShadow: 'none',
-              minWidth: 0,
-              fontWeight: 400,
-              fontFamily: 'Cera Pro, sans-serif',
-            }}
+            style={{ flex: 1, fontSize: 13, fontWeight: 400, fontFamily: 'Cera Pro, sans-serif', minWidth: 0, color: 'var(--color-accent)' }}
             autoFocus
             inputMode="text"
           />
+          <button
+            type="button"
+            style={{
+              background: 'none',
+              border: 'none',
+              marginLeft: 8,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              padding: 0,
+              height: 28,
+              width: 28,
+            }}
+            aria-label="Voice to text"
+          >
+            <Mic size={18} color="#E7DCC9" strokeWidth={1.7} />
+          </button>
         </form>
         <div className="bottom-nav__item" style={{ flex: '0 0 56px', minWidth: 0 }} onClick={() => setShowTerminal(true)} tabIndex={0} role="button">
           <SquareTerminal className="bottom-nav__icon" size={18} color="#E7DCC9" strokeWidth={1.7} />
@@ -135,8 +128,8 @@ const AgentPage: React.FC = () => {
             right: 0,
             bottom: 0,
             height: '52vh',
-            background: '#1a211a',
-            color: theme === 'dark' ? '#fff' : '#23272f',
+            background: 'var(--color-bg)',
+            color: '#fff',
             borderTopLeftRadius: 18,
             borderTopRightRadius: 18,
             boxShadow: '0 -4px 24px rgba(0,0,0,0.18)',
@@ -151,23 +144,11 @@ const AgentPage: React.FC = () => {
             <span style={{ fontWeight: 700, fontSize: 18, color: '#fff', fontFamily: 'Cera Pro, sans-serif' }}>Code Editor</span>
             <button
               onClick={() => setShowTerminal(false)}
-              style={{
-                background: '#E7DCC9',
-                color: '#232e25',
-                border: 'none',
-                borderRadius: 8,
-                padding: '8px 18px',
-                fontWeight: 700,
-                fontSize: 15,
-                cursor: 'pointer',
-                fontFamily: 'Cera Pro, sans-serif',
-                boxShadow: 'none',
-                marginLeft: 12,
-                transition: 'background 0.2s',
-              }}
+              className="repo-add-btn"
+              style={{ marginLeft: 12, fontWeight: 700, fontSize: 15, padding: '8px 18px', cursor: 'pointer' }}
             >Done</button>
           </div>
-          <div style={{ flex: 1, padding: '24px 20px', overflowY: 'auto', fontFamily: 'monospace', fontSize: 15, background: 'rgba(36,41,46,0.10)', borderRadius: 12, margin: 20, color: '#fff' }}>
+          <div style={{ flex: 1, padding: '24px 20px', overflowY: 'auto', fontFamily: 'monospace', fontSize: 15, background: 'rgba(35,46,37,0.92)', borderRadius: 12, margin: 20, color: '#fff', border: 'none' }}>
             {/* Placeholder for code changes */}
             Code Editor - See agent changes here
           </div>

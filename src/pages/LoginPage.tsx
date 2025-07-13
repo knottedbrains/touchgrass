@@ -74,6 +74,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                 transition: 'background 0.2s',
                 fontFamily: 'Cera Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, sans-serif',
               }}
+              inputMode="email"
             />
           </div>
           <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -98,6 +99,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                 transition: 'background 0.2s',
                 fontFamily: 'Cera Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, sans-serif',
               }}
+              inputMode="text"
             />
           </div>
           <button type="submit" style={{
