@@ -1,0 +1,548 @@
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('@/fonts/Cera Pro Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('@/fonts/Cera Pro Thin Italic.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('@/fonts/Cera Pro Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('@/fonts/Cera Pro Light Italic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('@/fonts/Cera Pro Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('@/fonts/Cera Pro Regular Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('@/fonts/Cera Pro Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('@/fonts/Cera Pro Medium Italic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('@/fonts/Cera Pro Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('@/fonts/Cera Pro Bold Italic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('@/fonts/Cera Pro Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cera Pro';
+  src: url('@/fonts/Cera Pro Black Italic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Botanical-inspired Theme variables */
+:root {
+  --color-bg: #f8faf8;
+  --color-bg-alt: #fff;
+  --color-text: #23272f;
+  --color-text-muted: #6b7280;
+  --color-accent: #e85a8a; /* petal pink */
+  --color-accent-hover: #c93c6d; /* deeper petal pink */
+  --color-accent-light: #f9c7d9; /* lightest petal pink */
+  --color-green: #6ea16e; /* stem green */
+  --color-green-light: #b7d7b7; /* light green */
+  --color-border: #e5e7eb;
+  --color-card: #fff;
+  --color-shadow: 0 4px 24px rgba(110,161,110,0.06);
+  --color-input-bg: #f1f7f1;
+  --color-input-border: #b7d7b7;
+  --color-error-bg: #fdf2f8;
+  --color-error-text: #be185d;
+  --color-error-border: #e85a8a;
+}
+.dark {
+  --color-bg: #23272f;
+  --color-bg-alt: #2d333b;
+  --color-text: #f3f4f6;
+  --color-text-muted: #b0b8c1;
+  --color-accent: #e85a8a;
+  --color-accent-hover: #c93c6d;
+  --color-accent-light: #3a1e2a;
+  --color-green: #6ea16e;
+  --color-green-light: #3a4d3a;
+  --color-border: #3a4d3a;
+  --color-card: #2d333b;
+  --color-shadow: 0 4px 24px rgba(110,161,110,0.10);
+  --color-input-bg: #23283a;
+  --color-input-border: #3a4d3a;
+  --color-error-bg: #2d1a1a;
+  --color-error-text: #e85a8a;
+  --color-error-border: #be185d;
+}
+
+body, .app {
+  font-family: 'Cera Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+/* Header */
+.dashboard-header {
+  background: var(--color-bg-alt);
+  border-bottom: 1px solid var(--color-border);
+  padding: 16px 20px;
+  box-shadow: var(--color-shadow);
+  transition: background 0.3s, border 0.3s;
+}
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.dashboard-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+.logout-button {
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px var(--color-accent-light);
+}
+.logout-button:hover {
+  background: var(--color-accent-hover);
+}
+
+/* Theme toggle - move to top left, add margin */
+.theme-toggle {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 101;
+  background: var(--color-bg-alt);
+  border: 2px solid var(--color-green);
+  color: var(--color-accent);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--color-green-light);
+  transition: background 0.2s, border 0.2s;
+}
+.theme-toggle:hover {
+  background: var(--color-green-light);
+}
+
+.circle-icon-btn {
+  background: var(--color-bg-alt);
+  border: 2px solid var(--color-green);
+  color: var(--color-accent);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--color-green-light);
+  transition: background 0.2s, border 0.2s;
+  margin-left: 0.5rem;
+}
+.circle-icon-btn:hover {
+  background: var(--color-green-light);
+}
+
+/* Login Page Styles */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--color-bg);
+}
+.login-card {
+  background: var(--color-card);
+  border-radius: 12px;
+  box-shadow: var(--color-shadow);
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  animation: fadeIn 0.5s ease-in-out;
+  transition: background 0.3s;
+  border: 1.5px solid var(--color-green-light);
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.login-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+.login-header p {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.form-group label {
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+.form-group input {
+  padding: 12px 16px;
+  border: 2px solid var(--color-input-border);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  background: var(--color-input-bg);
+  color: var(--color-text);
+}
+.form-group input:focus {
+  outline: none;
+  border-color: var(--color-green);
+  box-shadow: 0 0 0 3px var(--color-green-light);
+}
+.login-button {
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 10px;
+  box-shadow: 0 2px 8px var(--color-accent-light);
+}
+.login-button:hover {
+  background: var(--color-accent-hover);
+}
+.login-button:active {
+  background: var(--color-accent);
+}
+.error-message {
+  background: var(--color-error-bg);
+  color: var(--color-error-text);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--color-error-border);
+  font-size: 0.9rem;
+  text-align: center;
+}
+.login-footer {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+.login-footer p {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+/* Dashboard Styles */
+.dashboard-container {
+  min-height: 100vh;
+  background: var(--color-bg);
+  transition: background 0.3s;
+}
+.dashboard-main {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Empty state and repo input box */
+.empty-state {
+  background: var(--color-card);
+  color: var(--color-text);
+  border-radius: 16px;
+  box-shadow: var(--color-shadow);
+  padding: 40px 24px;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 420px;
+  margin-top: 48px;
+  transition: background 0.3s, color 0.3s;
+  border: 1.5px solid var(--color-green-light);
+}
+.empty-state h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.empty-desc {
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+}
+.repo-form, .repo-form-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+  margin-bottom: 12px;
+}
+.repo-form-inline {
+  flex-direction: row;
+  gap: 8px;
+  margin-bottom: 0;
+}
+.repo-input {
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1.5px solid var(--color-input-border);
+  background: var(--color-input-bg);
+  color: var(--color-text);
+  font-size: 1rem;
+  flex: 1;
+  transition: border-color 0.2s, background 0.3s, color 0.3s;
+}
+.repo-input:focus {
+  outline: none;
+  border-color: var(--color-green);
+}
+.repo-add-btn {
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px var(--color-accent-light);
+}
+.repo-add-btn:hover {
+  background: var(--color-accent-hover);
+}
+
+.projects-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+.projects-list-header h2 {
+  color: var(--color-text);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+.project-card {
+  background: var(--color-card);
+  border-radius: 14px;
+  box-shadow: var(--color-shadow);
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  transition: box-shadow 0.2s, transform 0.2s, background 0.3s;
+  border: 1.5px solid transparent;
+}
+.project-card.clickable:hover {
+  border: 1.5px solid var(--color-accent);
+  box-shadow: 0 6px 24px var(--color-accent-light);
+  transform: translateY(-2px) scale(1.01);
+}
+.project-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.project-icon {
+  font-size: 2rem;
+  color: var(--color-accent);
+  background: var(--color-bg);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-name {
+  color: var(--color-text);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.project-link {
+  color: var(--color-accent);
+  font-size: 0.95rem;
+  text-decoration: none;
+  word-break: break-all;
+}
+.project-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .empty-state {
+    padding: 24px 8px;
+    margin-top: 24px;
+  }
+  .projects-grid {
+    gap: 14px;
+  }
+  .project-card {
+    padding: 16px 10px;
+  }
+  .projects-list-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+}
+
+/* Project workspace and agent bar */
+.agent-bar {
+  background: var(--color-bg-alt);
+  border-top: 1.5px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  height: 64px;
+  z-index: 50;
+  box-shadow: 0 -2px 12px var(--color-green-light);
+}
+.agent-tab {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  color: var(--color-text);
+  border-radius: 8px;
+  margin-right: 8px;
+  padding: 8px 18px;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: all 0.2s;
+  position: relative;
+}
+.agent-tab.active {
+  background: var(--color-card);
+  border: 1.5px solid var(--color-accent);
+  box-shadow: var(--color-shadow);
+  color: var(--color-accent);
+}
+.agent-tab.add-agent {
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  font-size: 20px;
+  margin-left: 4px;
+  cursor: pointer;
+  box-shadow: var(--color-shadow);
+  transition: background 0.2s;
+}
+.agent-tab.add-agent:hover {
+  background: var(--color-accent-hover);
+} 
