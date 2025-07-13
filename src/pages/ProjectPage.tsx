@@ -58,6 +58,11 @@ const ProjectPage: React.FC = () => {
   return (
     <div className="project-workspace" style={{ minHeight: '100vh', background: 'var(--color-bg)' }}>
       <main className="workspace-main" style={{ paddingBottom: 80, paddingTop: 24, paddingLeft: 40, paddingRight: 40 }}>
+        {agents.length === 0 && (
+          <div style={{ color: '#E7DCC9', fontSize: 18, textAlign: 'center', margin: '40px 0 24px 0', fontFamily: 'Cera Pro, sans-serif', fontWeight: 500 }}>
+            There are currently no agents running.<br />Please import a project to get started.
+          </div>
+        )}
         <div className="agents-grid" style={{
           display: 'grid',
           gridTemplateColumns: agents.length > 1 ? '1fr 1fr' : '1fr',

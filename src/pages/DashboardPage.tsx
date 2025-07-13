@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../App'
-import { LogOut, Trash, FolderOpen, Flower2, CircleUserRound } from 'lucide-react'
+import { LogOut, Trash, FolderOpen, Flower2, CircleUserRound, SquareTerminal } from 'lucide-react'
 import gardenBg from '../assets/garden-bg.jpg'
 
 interface DashboardPageProps {
@@ -111,7 +111,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
           paddingTop: 24,
         }}>
           <h1 className="touchgrass-logo" style={{ margin: 0, fontWeight: 700, fontSize: 17, letterSpacing: '0.04em', color: '#fff', fontFamily: 'Cera Pro, sans-serif', fontVariant: 'small-caps', display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span style={{ fontSize: 22, lineHeight: 1, marginRight: 2 }}>🌱</span>touchgrass
+            <span style={{ fontSize: 22, lineHeight: 1, marginRight: 2 }}>🌱</span>gotouchgrass
           </h1>
         </header>
         {/* Floating logout button (bottom right) */}
@@ -173,34 +173,37 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                     import your github project &<br />continue building from your phone
                   </div>
                   <form className="repo-form" onSubmit={handleAddProject} style={{ width: '80vw', maxWidth: 520, display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center' }}>
-                    <input
-                      type="url"
-                      className="repo-input"
-                      placeholder="https://github.com/username/repo"
-                      value={repoUrl}
-                      onChange={e => setRepoUrl(e.target.value)}
-                      required
-                      style={{
-                        background: '#E7DCC9',
-                        color: '#8C7C63',
-                        fontFamily: 'Cera Pro, sans-serif',
-                        border: 'none',
-                        borderRadius: 8,
-                        padding: '12px 16px',
-                        fontSize: 15,
-                        outline: 'none',
-                        boxShadow: 'none',
-                        width: '100%',
-                        height: 48,
-                        marginBottom: 0
-                      }}
-                    />
-                    <style>{`
-                      .repo-input::placeholder {
-                        font-size: 13px !important;
-                        color: #b3a78f !important;
-                      }
-                    `}</style>
+                    <div style={{ position: 'relative', width: '100%' }}>
+                      <SquareTerminal size={18} color="#b3a78f" style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+                      <input
+                        type="url"
+                        className="repo-input"
+                        placeholder="https://github.com/username/repo or git@github.com:username/repo.git"
+                        value={repoUrl}
+                        onChange={e => setRepoUrl(e.target.value)}
+                        required
+                        style={{
+                          background: '#E7DCC9',
+                          color: '#8C7C63',
+                          fontFamily: 'Cera Pro, sans-serif',
+                          border: 'none',
+                          borderRadius: 8,
+                          padding: '12px 16px 12px 44px',
+                          fontSize: 15,
+                          outline: 'none',
+                          boxShadow: 'none',
+                          width: '100%',
+                          height: 48,
+                          marginBottom: 0
+                        }}
+                      />
+                      <style>{`
+                        .repo-input::placeholder {
+                          font-size: 13px !important;
+                          color: #b3a78f !important;
+                        }
+                      `}</style>
+                    </div>
                     <button type="submit" className="repo-add-btn" style={{
                       background: '#E7DCC9',
                       color: '#23272f',
@@ -225,34 +228,37 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                     <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 22, margin: '0 0 6px 0', fontFamily: 'Cera Pro, sans-serif', letterSpacing: '0.01em', textAlign: 'left' }}>Import new project</h2>
                   </div>
                   <form className="repo-form" onSubmit={handleAddProject} style={{ width: '80vw', maxWidth: 520, display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center', marginBottom: 10 }}>
-                    <input
-                      type="url"
-                      className="repo-input"
-                      placeholder="https://github.com/username/repo"
-                      value={repoUrl}
-                      onChange={e => setRepoUrl(e.target.value)}
-                      required
-                      style={{
-                        background: '#E7DCC9',
-                        color: '#8C7C63',
-                        fontFamily: 'Cera Pro, sans-serif',
-                        border: 'none',
-                        borderRadius: 8,
-                        padding: '12px 16px',
-                        fontSize: 15,
-                        outline: 'none',
-                        boxShadow: 'none',
-                        width: '100%',
-                        height: 48,
-                        marginBottom: 0
-                      }}
-                    />
-                    <style>{`
-                      .repo-input::placeholder {
-                        font-size: 13px !important;
-                        color: #b3a78f !important;
-                      }
-                    `}</style>
+                    <div style={{ position: 'relative', width: '100%' }}>
+                      <SquareTerminal size={18} color="#b3a78f" style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+                      <input
+                        type="url"
+                        className="repo-input"
+                        placeholder="https://github.com/username/repo or git@github.com:username/repo.git"
+                        value={repoUrl}
+                        onChange={e => setRepoUrl(e.target.value)}
+                        required
+                        style={{
+                          background: '#E7DCC9',
+                          color: '#8C7C63',
+                          fontFamily: 'Cera Pro, sans-serif',
+                          border: 'none',
+                          borderRadius: 8,
+                          padding: '12px 16px 12px 44px',
+                          fontSize: 15,
+                          outline: 'none',
+                          boxShadow: 'none',
+                          width: '100%',
+                          height: 48,
+                          marginBottom: 0
+                        }}
+                      />
+                      <style>{`
+                        .repo-input::placeholder {
+                          font-size: 13px !important;
+                          color: #b3a78f !important;
+                        }
+                      `}</style>
+                    </div>
                     <button type="submit" className="repo-add-btn" style={{
                       background: '#E7DCC9',
                       color: '#23272f',
@@ -328,8 +334,8 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
               )
             )}
             {activeTab === 'account' && (
-              <div style={{ maxWidth: 520, width: '100%', margin: '0 auto', textAlign: 'left', padding: 0, marginTop: 88 }}>
-                <h2 style={{ fontWeight: 600, fontSize: 32, margin: '48px 0 12px 0', color: '#fff', textAlign: 'left', fontFamily: 'Cera Pro, sans-serif' }}>Account</h2>
+              <div style={{ maxWidth: 520, width: '100%', margin: '0 auto', textAlign: 'left', padding: 0, marginTop: 72 }}>
+                <h2 style={{ fontWeight: 600, fontSize: 32, margin: '0 0 12px 0', color: '#fff', textAlign: 'left', fontFamily: 'Cera Pro, sans-serif' }}>Account</h2>
                 <form style={{ display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'stretch', boxShadow: 'none', border: 'none', maxWidth: 520, width: '100%', margin: '0 auto' }}>
                   <label style={{ color: '#E7DCC9', fontWeight: 600, fontSize: 14, textAlign: 'left', marginBottom: 4, fontFamily: 'Cera Pro, sans-serif' }}>Name</label>
                   <input type="text" defaultValue="Rachie" style={{ width: '100%', background: '#E7DCC9', color: '#8C7C63', fontFamily: 'Cera Pro, sans-serif', fontWeight: 400, fontSize: 16, border: 'none', borderRadius: 8, padding: '12px 16px', marginBottom: 8, outline: 'none', boxShadow: 'none', transition: 'background 0.2s' }} />
