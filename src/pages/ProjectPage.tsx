@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTheme } from '../App'
-import { Plus, House } from 'lucide-react'
+import { Plus, House, X } from 'lucide-react'
 
 interface Agent {
   id: string
@@ -82,11 +82,43 @@ const ProjectPage: React.FC = () => {
                 flexDirection: 'column',
                 minHeight: 260,
                 transition: 'box-shadow 0.2s, border 0.2s',
+                position: 'relative',
               }}
               onClick={() => navigate(`/project/${projectId}/agent/${agent.id}`)}
               tabIndex={0}
               role="button"
             >
+              {/* X button top right */}
+              {agents.length > 1 && (
+                <button
+                  onClick={e => { e.stopPropagation(); closeAgent(agent.id); }}
+                  style={{
+                    position: 'absolute',
+                    top: 8,
+                    right: 8,
+                    width: 34,
+                    height: 34,
+                    borderRadius: '50%',
+                    background: 'rgba(231,220,201,0.98)',
+                    border: '1.5px solid #cbbfae',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: '0 2px 8px 0 rgba(36,41,46,0.10)',
+                    cursor: 'pointer',
+                    opacity: 1,
+                    transition: 'background 0.18s, box-shadow 0.18s',
+                    zIndex: 2,
+                  }}
+                  tabIndex={0}
+                  aria-label="Remove agent"
+                  className="agent-x-btn"
+                  onMouseOver={e => e.currentTarget.style.background = 'rgba(203,191,174,0.98)'}
+                  onMouseOut={e => e.currentTarget.style.background = 'rgba(231,220,201,0.98)'}
+                >
+                  <X size={20} color="#232e25" strokeWidth={2.2} />
+                </button>
+              )}
               <div style={{
                 padding: '4px 12px',
                 borderBottom: '1px solid var(--color-border)',

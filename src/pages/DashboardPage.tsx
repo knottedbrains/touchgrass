@@ -92,6 +92,10 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
       minWidth: '100vw',
       position: 'relative',
       overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
     }}>
       <div style={{ position: 'relative', zIndex: 1 }}>
         <header className="dashboard-header" style={{
@@ -103,10 +107,11 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
           left: 0,
           width: '100%',
           zIndex: 10,
-          height: 44,
+          height: 64,
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'center',
+          paddingTop: 24,
         }}>
           <h1 className="touchgrass-logo" style={{ margin: 0, fontWeight: 700, fontSize: 17, letterSpacing: '0.04em', color: '#fff', fontFamily: 'Cera Pro, sans-serif', textTransform: 'lowercase' }}>
             🌱touchgrass
@@ -139,8 +144,20 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
         >
           <LogOut size={18} color="var(--color-accent)" />
         </button>
-        <main className="dashboard-main">
-          <div className="dashboard-content">
+        <main className="dashboard-main" style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+        }}>
+          <div className="dashboard-content" style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+          }}>
             {activeTab === 'projects' && (
               projects.length === 0 ? (
                 <div style={{

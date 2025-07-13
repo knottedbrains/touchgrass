@@ -616,6 +616,7 @@ body, .app {
   outline: none !important;
   box-shadow: none !important;
   background: transparent;
+  color: var(--color-accent) !important;
 }
 .agent-chat-box input[type="text"]:focus, .agent-chat-box input[type="text"]:active {
   border: none !important;
@@ -856,4 +857,9 @@ body, .app {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
+} 
+
+.agent-chat-box input::placeholder {
+  color: var(--color-accent) !important;
+  opacity: 1;
 } 
