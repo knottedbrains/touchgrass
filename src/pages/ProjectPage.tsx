@@ -29,6 +29,8 @@ const ProjectPage: React.FC = () => {
   ])
   const [selectedAgent, setSelectedAgent] = useState('1')
   const [showGrid, setShowGrid] = useState(true)
+  // Add state for kill confirmation modal
+  const [killAgentId, setKillAgentId] = useState<string | null>(null);
 
   const addAgent = () => {
     const newId = Date.now().toString()
@@ -96,32 +98,32 @@ const ProjectPage: React.FC = () => {
               {/* X button top right */}
               {agents.length > 1 && (
                 <button
-                  onClick={e => { e.stopPropagation(); closeAgent(agent.id); }}
+                  onClick={e => { e.stopPropagation(); setKillAgentId(agent.id); }}
                   style={{
                     position: 'absolute',
                     top: 8,
                     right: 8,
-                    width: 34,
-                    height: 34,
+                    width: 26,
+                    height: 26,
                     borderRadius: '50%',
-                    background: 'rgba(231,220,201,0.98)',
-                    border: '1.5px solid #cbbfae',
+                    background: 'rgba(232,90,90,0.12)',
+                    border: '1.5px solid #e85a5a',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    boxShadow: '0 2px 8px 0 rgba(36,41,46,0.10)',
                     cursor: 'pointer',
                     opacity: 1,
-                    transition: 'background 0.18s, box-shadow 0.18s',
+                    transition: 'background 0.18s, border 0.18s',
                     zIndex: 2,
+                    boxShadow: 'none',
                   }}
                   tabIndex={0}
                   aria-label="Remove agent"
                   className="agent-x-btn"
-                  onMouseOver={e => e.currentTarget.style.background = 'rgba(203,191,174,0.98)'}
-                  onMouseOut={e => e.currentTarget.style.background = 'rgba(231,220,201,0.98)'}
+                  onMouseOver={e => e.currentTarget.style.background = 'rgba(232,90,90,0.22)'}
+                  onMouseOut={e => e.currentTarget.style.background = 'rgba(232,90,90,0.12)'}
                 >
-                  <X size={20} color="#232e25" strokeWidth={2.2} />
+                  <X size={14} color="#e85a5a" strokeWidth={2.2} />
                 </button>
               )}
               <div style={{
@@ -149,21 +151,52 @@ const ProjectPage: React.FC = () => {
       </main>
       {/* Divider bar above nav bar */}
       <div className="bottom-nav-divider" />
-      <nav className="bottom-nav">
-        <div className="bottom-nav__item" onClick={() => navigate('/dashboard')} tabIndex={0} role="button">
+      <nav className="bottom-nav" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="bottom-nav__item" onClick={() => navigate('/dashboard')} tabIndex={0} role="button" style={{ flex: '0 0 56px', minWidth: 0 }}>
           <House className="bottom-nav__icon" size={18} color="#E7DCC9" strokeWidth={1.7} />
           <span className="bottom-nav__label" style={{ color: '#232e25', fontSize: 9 }}>Dashboard</span>
         </div>
-        <div className="bottom-nav__item" tabIndex={0} role="presentation" style={{ pointerEvents: 'none', opacity: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="bottom-nav__item" tabIndex={0} role="presentation" style={{ pointerEvents: 'none', opacity: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
           <span style={{ color: '#E7DCC9', fontSize: 16, fontWeight: 700, fontFamily: 'Cera Pro, sans-serif', letterSpacing: '0.01em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 140, display: 'block', marginTop: 2 }}>
             {project?.name ? project.name.replace(/^[^/]+\//, '').replace(/\.git$/, '') : 'Project'}
           </span>
         </div>
-        <div className="bottom-nav__item" onClick={addAgent} tabIndex={0} role="button">
+        <div className="bottom-nav__item" onClick={addAgent} tabIndex={0} role="button" style={{ flex: '0 0 56px', minWidth: 0 }}>
           <Plus className="bottom-nav__icon" size={18} color="#E7DCC9" strokeWidth={1.7} />
           <span className="bottom-nav__label" style={{ color: '#232e25', fontSize: 9 }}>Add Agent</span>
         </div>
       </nav>
+      {/* Kill agent confirmation modal */}
+      {killAgentId && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          background: 'rgba(26,33,26,0.75)',
+          zIndex: 200,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '0 16px',
+        }}>
+          <div style={{ background: '#232e25', borderRadius: 16, padding: '28px 18px', minWidth: 0, maxWidth: 340, width: '100%', boxShadow: '0 4px 32px rgba(0,0,0,0.18)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div style={{ color: '#fff', fontWeight: 700, fontSize: 20, marginBottom: 16, fontFamily: 'Cera Pro, sans-serif', textAlign: 'center' }}>Kill Agent?</div>
+            <div style={{ color: '#E7DCC9', fontSize: 15, marginBottom: 24, textAlign: 'center', fontFamily: 'Cera Pro, sans-serif' }}>
+              Are you sure you want to kill this agent?<br />
+              <span style={{ fontSize: 14, color: '#e85a5a' }}>This action cannot be undone.</span>
+            </div>
+            <div style={{ display: 'flex', gap: 14, width: '100%', justifyContent: 'center' }}>
+              <button onClick={() => setKillAgentId(null)} style={{ background: '#E7DCC9', color: '#232e25', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 15, padding: '10px 24px', cursor: 'pointer', fontFamily: 'Cera Pro, sans-serif' }}>Cancel</button>
+              <button onClick={() => {
+                setAgents(agents.filter(a => a.id !== killAgentId));
+                setKillAgentId(null);
+              }} style={{ background: '#e85a5a', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 15, padding: '10px 24px', cursor: 'pointer', fontFamily: 'Cera Pro, sans-serif' }}>Kill</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
