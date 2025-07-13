@@ -98,7 +98,7 @@ const AgentPage: React.FC = () => {
           <button
             type="button"
             style={{
-              background: 'none',
+              background: '#cbbfae',
               border: 'none',
               marginLeft: 8,
               display: 'flex',

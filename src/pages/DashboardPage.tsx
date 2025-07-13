@@ -218,8 +218,8 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                       `}</style>
                     </div>
                     <button type="submit" className="repo-add-btn" style={{
-                      background: '#E7DCC9',
-                      color: '#23272f',
+                      background: '#cbbfae',
+                      color: '#232e25',
                       border: 'none',
                       borderRadius: 8,
                       fontWeight: 700,
@@ -272,8 +272,8 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                         `}</style>
                       </div>
                       <button type="submit" className="repo-add-btn" style={{
-                        background: '#E7DCC9',
-                        color: '#23272f',
+                        background: '#cbbfae',
+                        color: '#232e25',
                         border: 'none',
                         borderRadius: 8,
                         fontWeight: 700,
@@ -370,8 +370,8 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                   <input type="text" defaultValue="rachie" style={{ width: '100%', background: '#E7DCC9', color: '#8C7C63', fontFamily: 'Cera Pro, sans-serif', fontWeight: 400, fontSize: 13, border: 'none', borderRadius: 8, padding: '10px 12px', marginBottom: 8, outline: 'none', boxShadow: 'none', transition: 'background 0.2s' }} />
                   <label style={{ color: '#E7DCC9', fontWeight: 600, fontSize: 11, textAlign: 'left', marginBottom: 4, fontFamily: 'Cera Pro, sans-serif' }}>Email</label>
                   <input type="email" defaultValue="rachie@email.com" style={{ width: '100%', background: '#E7DCC9', color: '#8C7C63', fontFamily: 'Cera Pro, sans-serif', fontWeight: 400, fontSize: 13, border: 'none', borderRadius: 8, padding: '10px 12px', outline: 'none', boxShadow: 'none', transition: 'background 0.2s' }} />
-                  <button type="submit" className="repo-add-btn" style={{ marginTop: 18, fontWeight: 700, fontSize: 14, padding: '10px 0', borderRadius: 8, background: '#E7DCC9', color: '#232e25', border: 'none', fontFamily: 'Cera Pro, sans-serif', boxShadow: 'none', transition: 'background 0.2s', width: '100%' }}>Save</button>
-                  <button type="button" onClick={onLogout} style={{ marginTop: 8, fontWeight: 700, fontSize: 14, padding: '10px 0', borderRadius: 8, background: '#E7DCC9', color: '#232e25', border: 'none', fontFamily: 'Cera Pro, sans-serif', boxShadow: 'none', transition: 'background 0.2s', width: '100%', cursor: 'pointer' }}>Log out</button>
+                  <button type="submit" className="repo-add-btn" style={{ marginTop: 18, fontWeight: 700, fontSize: 14, padding: '10px 0', borderRadius: 8, background: '#cbbfae', color: '#232e25', border: 'none', fontFamily: 'Cera Pro, sans-serif', boxShadow: 'none', transition: 'background 0.2s', width: '100%' }}>Save</button>
+                  <button type="button" onClick={onLogout} style={{ marginTop: 8, fontWeight: 700, fontSize: 14, padding: '10px 0', borderRadius: 8, background: '#cbbfae', color: '#232e25', border: 'none', fontFamily: 'Cera Pro, sans-serif', boxShadow: 'none', transition: 'background 0.2s', width: '100%', cursor: 'pointer' }}>Log out</button>
                 </form>
               </div>
             )}

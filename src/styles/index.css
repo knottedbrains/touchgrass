@@ -404,7 +404,8 @@ body, .app {
 .repo-add-btn {
   background: var(--color-accent);
   color: #fff;
-  border: none;
+  border: none !important;
+  outline: none !important;
   border-radius: 12px;
   padding: 14px 28px;
   font-weight: 700;

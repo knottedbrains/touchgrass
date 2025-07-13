@@ -188,7 +188,7 @@ const ProjectPage: React.FC = () => {
               <span style={{ fontSize: 14, color: '#e85a5a' }}>This action cannot be undone.</span>
             </div>
             <div style={{ display: 'flex', gap: 14, width: '100%', justifyContent: 'center' }}>
-              <button onClick={() => setKillAgentId(null)} style={{ background: '#E7DCC9', color: '#232e25', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 15, padding: '10px 24px', cursor: 'pointer', fontFamily: 'Cera Pro, sans-serif' }}>Cancel</button>
+              <button onClick={() => setKillAgentId(null)} style={{ background: '#cbbfae', color: '#232e25', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: 15, padding: '10px 24px', cursor: 'pointer', fontFamily: 'Cera Pro, sans-serif' }}>Cancel</button>
               <button onClick={() => {
                 setAgents(agents.filter(a => a.id !== killAgentId));
                 setKillAgentId(null);
