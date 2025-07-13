@@ -72,8 +72,8 @@ const AgentPage: React.FC = () => {
         </div>
       </div>
       {/* Divider bar above nav bar */}
-      <div className="bottom-nav-divider" />
-      <nav className="bottom-nav" style={{ borderTopLeftRadius: 18, borderTopRightRadius: 18, background: 'rgba(26,33,26,0.85)', backdropFilter: 'blur(12px)', border: 'none', boxShadow: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 8px' }}>
+      <div className="bottom-nav-divider" style={{ width: '100vw', height: '0.75px', background: 'rgba(231,220,201,0.5)', position: 'fixed', left: 0, bottom: 64, zIndex: 101 }} />
+      <nav className="bottom-nav" style={{ borderRadius: 0, background: 'rgba(26,33,26,0.85)', backdropFilter: 'blur(12px)', borderTop: '0.75px solid rgba(231,220,201,0.5)', borderLeft: 'none', borderRight: 'none', borderBottom: 'none', boxShadow: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 8px' }}>
         <div className="bottom-nav__item" style={{ flex: '0 0 56px', minWidth: 0 }} onClick={() => navigate(`/project/${projectId}`)} tabIndex={0} role="button">
           <BringToFront className="bottom-nav__icon" size={18} color="#E7DCC9" strokeWidth={1.7} />
           <span className="bottom-nav__label">Workspace</span>

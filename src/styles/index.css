@@ -612,12 +612,15 @@ body, .app {
   background: var(--color-bg-alt);
 }
 .agent-chat-box input[type="text"] {
-  padding: 10px 14px !important;
-  font-size: 15px !important;
-  height: 32px !important;
-  border: 1.5px solid #ededed !important;
-  background: var(--color-input-bg);
-  border-radius: 8px;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent;
+}
+.agent-chat-box input[type="text"]:focus, .agent-chat-box input[type="text"]:active {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 .agent-chat-box button[type="submit"] {
   padding: 10px 20px !important;
