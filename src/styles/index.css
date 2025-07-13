@@ -607,7 +607,7 @@ body, .app {
 .agent-chat-box {
   padding: 10px 20px !important;
   height: 48px !important;
-  border-top: 1.5px solid #ededed !important;
+  border-top: none;
   box-shadow: 0 -1px 2px rgba(0,0,0,0.02) !important;
   background: var(--color-bg-alt);
 }
@@ -847,4 +847,10 @@ body, .app {
   transform: scale(1.035);
   background: rgba(231,220,201,0.85) !important;
   box-shadow: 0 2px 12px 0 rgba(36,41,46,0.06);
+} 
+
+.agent-chat-box input[type="text"]:focus, .agent-chat-box input[type="text"]:active {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 } 

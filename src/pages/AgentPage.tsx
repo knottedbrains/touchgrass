@@ -71,78 +71,61 @@ const AgentPage: React.FC = () => {
           ))}
         </div>
       </div>
-      <form
-        className="agent-chat-box"
-        onSubmit={handleSend}
-        style={{
-          position: 'fixed',
-          left: 0,
-          right: 0,
-          bottom: 56, // height of nav bar
-          background: theme === 'dark' ? '#23272f' : '#f3f4f6',
-          border: 'none',
-          display: 'flex',
-          alignItems: 'center',
-          padding: '0 18px',
-          zIndex: 20,
-          boxShadow: 'none',
-          height: 44,
-          borderRadius: 16,
-          width: '92vw',
-          maxWidth: 600,
-          margin: '0 auto',
-          transform: 'translateX(0)',
-          color: theme === 'dark' ? '#fff' : '#23272f',
-        }}
-      >
-        <input
-          type="text"
-          value={chatInput}
-          onChange={e => setChatInput(e.target.value)}
-          placeholder="Chat with your agent"
+      {/* Divider bar above nav bar */}
+      <div className="bottom-nav-divider" />
+      <nav className="bottom-nav" style={{ borderTopLeftRadius: 18, borderTopRightRadius: 18, background: 'rgba(26,33,26,0.85)', backdropFilter: 'blur(12px)', border: 'none', boxShadow: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 8px' }}>
+        <div className="bottom-nav__item" style={{ flex: '0 0 56px', minWidth: 0 }} onClick={() => navigate(`/project/${projectId}`)} tabIndex={0} role="button">
+          <BringToFront className="bottom-nav__icon" size={18} color="#E7DCC9" strokeWidth={1.7} />
+          <span className="bottom-nav__label">Workspace</span>
+        </div>
+        <form
+          className="agent-chat-box"
+          onSubmit={handleSend}
           style={{
             flex: 1,
-            border: 'none', // absolutely no border
-            borderRadius: 0, // no border radius for input itself
-            padding: '10px 0',
-            fontSize: 17,
-            background: 'transparent',
-            color: theme === 'dark' ? '#fff' : '#23272f',
-            outline: 'none',
-            boxShadow: 'none',
-            minWidth: 0,
-            fontWeight: 500,
-            letterSpacing: 0.1,
-          }}
-          autoFocus
-          inputMode="text"
-        />
-        <button
-          type="submit"
-          style={{
-            background: 'none',
-            border: 'none',
-            borderRadius: '50%',
-            width: 36,
-            height: 36,
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            marginLeft: 8,
-            color: theme === 'dark' ? '#fff' : '#23272f',
-            opacity: 1,
-            cursor: 'pointer',
+            margin: '0 8px',
+            background: 'rgba(231,220,201,0.13)',
+            borderRadius: 18,
+            padding: '0 14px',
+            height: 36,
+            minWidth: 0,
             boxShadow: 'none',
-            transition: 'background 0.2s',
-            fontSize: 22,
-            outline: 'none',
-            alignSelf: 'flex-end',
+            border: 'none',
+            fontFamily: 'Cera Pro, sans-serif',
+            borderTop: 'none',
+            maxWidth: '100%',
           }}
-          aria-label="Send voice message"
         >
-          <Mic size={22} color={theme === 'dark' ? '#fff' : '#23272f'} />
-        </button>
-      </form>
+          <input
+            type="text"
+            value={chatInput}
+            onChange={e => setChatInput(e.target.value)}
+            placeholder="Chat with your agent"
+            style={{
+              flex: 1,
+              border: 'none',
+              borderRadius: 18,
+              padding: '8px 0',
+              fontSize: 13,
+              background: 'transparent',
+              color: '#232e25',
+              outline: 'none',
+              boxShadow: 'none',
+              minWidth: 0,
+              fontWeight: 400,
+              fontFamily: 'Cera Pro, sans-serif',
+            }}
+            autoFocus
+            inputMode="text"
+          />
+        </form>
+        <div className="bottom-nav__item" style={{ flex: '0 0 56px', minWidth: 0 }} onClick={() => setShowTerminal(true)} tabIndex={0} role="button">
+          <SquareTerminal className="bottom-nav__icon" size={18} color="#E7DCC9" strokeWidth={1.7} />
+          <span className="bottom-nav__label">Terminal</span>
+        </div>
+      </nav>
       {/* Terminal Bottom Sheet Modal */}
       {showTerminal && (
         <div
@@ -152,7 +135,7 @@ const AgentPage: React.FC = () => {
             right: 0,
             bottom: 0,
             height: '52vh',
-            background: theme === 'dark' ? '#181c1f' : '#fff',
+            background: '#1a211a',
             color: theme === 'dark' ? '#fff' : '#23272f',
             borderTopLeftRadius: 18,
             borderTopRightRadius: 18,
@@ -165,94 +148,31 @@ const AgentPage: React.FC = () => {
           }}
         >
           <div style={{ padding: '18px 20px 0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontWeight: 700, fontSize: 18 }}>Code Editor</span>
+            <span style={{ fontWeight: 700, fontSize: 18, color: '#fff', fontFamily: 'Cera Pro, sans-serif' }}>Code Editor</span>
             <button
               onClick={() => setShowTerminal(false)}
               style={{
-                background: 'var(--color-accent)',
-                color: '#fff',
+                background: '#E7DCC9',
+                color: '#232e25',
                 border: 'none',
                 borderRadius: 8,
                 padding: '8px 18px',
-                fontWeight: 600,
+                fontWeight: 700,
                 fontSize: 15,
                 cursor: 'pointer',
+                fontFamily: 'Cera Pro, sans-serif',
                 boxShadow: 'none',
                 marginLeft: 12,
+                transition: 'background 0.2s',
               }}
             >Done</button>
           </div>
-          <div style={{ flex: 1, padding: '24px 20px', overflowY: 'auto', fontFamily: 'monospace', fontSize: 15, background: theme === 'dark' ? 'rgba(0,0,0,0.10)' : '#f3f4f6', borderRadius: 12, margin: 20 }}>
+          <div style={{ flex: 1, padding: '24px 20px', overflowY: 'auto', fontFamily: 'monospace', fontSize: 15, background: 'rgba(36,41,46,0.10)', borderRadius: 12, margin: 20, color: '#fff' }}>
             {/* Placeholder for code changes */}
             Code Editor - See agent changes here
           </div>
         </div>
       )}
-      <nav className="agent-bar" style={{
-        position: 'fixed',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'var(--color-bg-alt)',
-        borderTop: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: '0 24px',
-        height: 56,
-        zIndex: 30,
-        boxShadow: 'none',
-      }}>
-        <button
-          className="agent-tab terminal-toggle"
-          style={{
-            background: 'none',
-            color: 'var(--color-accent)',
-            border: 'none',
-            borderRadius: 0,
-            width: 56,
-            height: 56,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 24,
-            margin: 0,
-            cursor: 'pointer',
-            boxShadow: 'none',
-            transition: 'color 0.2s',
-            padding: 0,
-            outline: 'none',
-          }}
-          title="Terminal"
-        >
-          <SquareTerminal size={24} strokeWidth={1.6} color="var(--color-accent)" />
-        </button>
-        <button
-          className="agent-tab bring-to-front"
-          style={{
-            background: 'none',
-            color: 'var(--color-accent)',
-            border: 'none',
-            borderRadius: 0,
-            width: 56,
-            height: 56,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 24,
-            margin: 0,
-            cursor: 'pointer',
-            boxShadow: 'none',
-            transition: 'color 0.2s',
-            padding: 0,
-            outline: 'none',
-          }}
-          title="Back to project workspace"
-          onClick={() => navigate(`/project/${projectId}`)}
-        >
-          <BringToFront size={24} strokeWidth={1.6} color="var(--color-accent)" />
-        </button>
-      </nav>
     </div>
   )
 }

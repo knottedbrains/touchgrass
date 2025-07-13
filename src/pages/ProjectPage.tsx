@@ -117,8 +117,8 @@ const ProjectPage: React.FC = () => {
           <House className="bottom-nav__icon" size={18} color="#E7DCC9" strokeWidth={1.7} />
           <span className="bottom-nav__label" style={{ color: '#232e25', fontSize: 9 }}>Dashboard</span>
         </div>
-        <div className="bottom-nav__item" tabIndex={0} role="button" style={{ pointerEvents: 'none', opacity: 1 }}>
-          <span className="bottom-nav__label" style={{ color: '#E7DCC9', fontSize: 10, fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 90, display: 'block' }}>
+        <div className="bottom-nav__item" tabIndex={0} role="presentation" style={{ pointerEvents: 'none', opacity: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <span style={{ color: '#E7DCC9', fontSize: 16, fontWeight: 700, fontFamily: 'Cera Pro, sans-serif', letterSpacing: '0.01em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 140, display: 'block', marginTop: 2 }}>
             {project?.name ? project.name.replace(/^[^/]+\//, '').replace(/\.git$/, '') : 'Project'}
           </span>
         </div>

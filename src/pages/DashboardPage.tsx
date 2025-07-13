@@ -70,7 +70,19 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
   const handleDeleteProject = (e: React.MouseEvent, id: string) => {
     e.stopPropagation()
     if (window.confirm('Are you sure you want to delete this project? This action cannot be undone.')) {
-      setProjects(projects.filter(project => project.id !== id))
+      setProjects(prev => {
+        const updated = prev.filter(project => project.id !== id)
+        if (lastProjectId === id) {
+          if (updated.length > 0) {
+            localStorage.setItem('lastProjectId', updated[0].id)
+            setLastProjectId(updated[0].id)
+          } else {
+            localStorage.removeItem('lastProjectId')
+            setLastProjectId(null)
+          }
+        }
+        return updated
+      })
     }
   }
 
@@ -240,9 +252,14 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
             {activeTab === 'account' && (
               <div style={{ maxWidth: 420, margin: '80px auto 0 auto', textAlign: 'center', padding: 0 }}>
                 <h2 style={{ fontWeight: 600, fontSize: 32, margin: '48px 0 12px 0', color: '#fff' }}>Account</h2>
-                <div style={{ color: '#E7DCC9', fontSize: 16, marginBottom: 28 }}>
-                  Account management coming soon.
-                </div>
+                <form style={{ display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'stretch', boxShadow: 'none', border: 'none', maxWidth: 320, margin: '0 auto' }}>
+                  <label style={{ color: '#E7DCC9', fontWeight: 600, fontSize: 14, textAlign: 'left', marginBottom: 4, fontFamily: 'Cera Pro, sans-serif' }}>Name</label>
+                  <input type="text" defaultValue="Rachie" style={{ width: '100%', background: '#fff', color: '#232e25', fontFamily: 'Cera Pro, sans-serif', fontWeight: 600, fontSize: 16, border: '1.5px solid #cbbfae', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }} />
+                  <label style={{ color: '#E7DCC9', fontWeight: 600, fontSize: 14, textAlign: 'left', marginBottom: 4, fontFamily: 'Cera Pro, sans-serif' }}>Username</label>
+                  <input type="text" defaultValue="rachie" style={{ width: '100%', background: '#fff', color: '#232e25', fontFamily: 'Cera Pro, sans-serif', fontWeight: 400, fontSize: 15, border: '1.5px solid #cbbfae', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }} />
+                  <label style={{ color: '#E7DCC9', fontWeight: 600, fontSize: 14, textAlign: 'left', marginBottom: 4, fontFamily: 'Cera Pro, sans-serif' }}>Email</label>
+                  <input type="email" defaultValue="rachie@email.com" style={{ width: '100%', background: '#fff', color: '#232e25', fontFamily: 'Cera Pro, sans-serif', fontWeight: 400, fontSize: 15, border: '1.5px solid #cbbfae', borderRadius: 8, padding: '10px 12px' }} />
+                </form>
               </div>
             )}
           </div>
@@ -263,7 +280,12 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
              <span className="bottom-nav__label">Projects</span>
            </div>
            <div className={`bottom-nav__item${activeTab === 'agents' ? ' bottom-nav__item--active' : ''}`} onClick={() => {
-             if (lastProjectId) navigate(`/project/${lastProjectId}`)
+             const valid = projects.find(p => p.id === lastProjectId)
+             if (lastProjectId && valid) {
+               navigate(`/project/${lastProjectId}`)
+             } else {
+               // Optionally show a toast or message: "No recent project found"
+             }
            }} tabIndex={0} role="button">
              <Flower2 className="bottom-nav__icon" size={18} color="#E7DCC9" strokeWidth={1.7} />
              <span className="bottom-nav__label">Agents</span>
