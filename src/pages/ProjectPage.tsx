@@ -91,7 +91,7 @@ const ProjectPage: React.FC = () => {
                 padding: '4px 12px',
                 borderBottom: '1px solid var(--color-border)',
                 fontWeight: 600,
-                color: 'var(--color-accent)',
+                color: '#232e25',
                 fontSize: 13,
                 minHeight: 0,
                 lineHeight: 1.2,
@@ -110,101 +110,22 @@ const ProjectPage: React.FC = () => {
           ))}
         </div>
       </main>
-      <nav className="agent-bar" style={{
-        position: 'fixed',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'var(--color-bg-alt)',
-        borderTop: '1px solid var(--color-border)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '0 16px',
-        height: 48,
-        zIndex: 50,
-        boxShadow: 'none',
-      }}>
-        <button
-          className="agent-tab add-agent"
-          onClick={addAgent}
-          style={{
-            background: 'none',
-            color: 'var(--color-accent)',
-            border: 'none',
-            borderRadius: 0,
-            width: 40,
-            height: 40,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 28,
-            margin: 0,
-            cursor: 'pointer',
-            boxShadow: 'none',
-            transition: 'color 0.2s',
-            padding: 0,
-            outline: 'none',
-            position: 'absolute',
-            left: 16,
-          }}
-          title="Add agent"
-        >
-          <Plus size={28} strokeWidth={2.2} color="var(--color-accent)" />
-        </button>
-        <button
-          className="agent-tab home-btn"
-          onClick={() => navigate('/dashboard')}
-          style={{
-            background: 'none',
-            color: 'var(--color-accent)',
-            border: 'none',
-            borderRadius: 0,
-            width: 40,
-            height: 40,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 28,
-            margin: 0,
-            cursor: 'pointer',
-            boxShadow: 'none',
-            transition: 'color 0.2s',
-            padding: 0,
-            outline: 'none',
-          }}
-          title="Go to dashboard"
-        >
-          <House size={28} strokeWidth={2.2} color="var(--color-accent)" />
-        </button>
-        <button
-          className="agent-tab done-btn"
-          onClick={() => navigate(`/project/${projectId}/agent/${selectedAgent}`)}
-          style={{
-            background: 'none',
-            color: 'var(--color-accent)',
-            border: 'none',
-            borderRadius: 0,
-            width: 56,
-            height: 48,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 20,
-            fontWeight: 700,
-            margin: 0,
-            cursor: 'pointer',
-            boxShadow: 'none',
-            transition: 'color 0.2s',
-            padding: 0,
-            outline: 'none',
-            position: 'absolute',
-            right: 16,
-          }}
-          title="Done"
-        >
-          Done
-        </button>
+      {/* Divider bar above nav bar */}
+      <div className="bottom-nav-divider" />
+      <nav className="bottom-nav">
+        <div className="bottom-nav__item" onClick={() => navigate('/dashboard')} tabIndex={0} role="button">
+          <House className="bottom-nav__icon" size={18} color="#E7DCC9" strokeWidth={1.7} />
+          <span className="bottom-nav__label" style={{ color: '#232e25', fontSize: 9 }}>Dashboard</span>
+        </div>
+        <div className="bottom-nav__item" tabIndex={0} role="button" style={{ pointerEvents: 'none', opacity: 1 }}>
+          <span className="bottom-nav__label" style={{ color: '#E7DCC9', fontSize: 10, fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 90, display: 'block' }}>
+            {project?.name ? project.name.replace(/^[^/]+\//, '').replace(/\.git$/, '') : 'Project'}
+          </span>
+        </div>
+        <div className="bottom-nav__item" onClick={addAgent} tabIndex={0} role="button">
+          <Plus className="bottom-nav__icon" size={18} color="#E7DCC9" strokeWidth={1.7} />
+          <span className="bottom-nav__label" style={{ color: '#232e25', fontSize: 9 }}>Add Agent</span>
+        </div>
       </nav>
     </div>
   )
