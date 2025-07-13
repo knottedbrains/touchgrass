@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTheme } from '../App'
-import { ArrowLeft, Plus } from 'lucide-react'
+import { ArrowLeft, Plus, List, LayoutGrid } from 'lucide-react'
 
 interface Agent {
   id: string
@@ -28,6 +28,7 @@ const ProjectPage: React.FC = () => {
     { id: '1', name: 'Agent 1' }
   ])
   const [selectedAgent, setSelectedAgent] = useState('1')
+  const [showGrid, setShowGrid] = useState(true)
 
   const addAgent = () => {
     const newId = Date.now().toString()
@@ -114,13 +115,14 @@ const ProjectPage: React.FC = () => {
         right: 0,
         bottom: 0,
         background: 'var(--color-bg-alt)',
-        borderTop: '1.5px solid var(--color-border)',
+        borderTop: '1px solid var(--color-border)',
         display: 'flex',
         alignItems: 'center',
-        padding: '0 12px',
-        height: 64,
+        justifyContent: 'space-between',
+        padding: '0 16px',
+        height: 48,
         zIndex: 50,
-        boxShadow: 'none'
+        boxShadow: 'none',
       }}>
         <button
           className="agent-tab add-agent"
@@ -130,13 +132,13 @@ const ProjectPage: React.FC = () => {
             color: 'var(--color-accent)',
             border: 'none',
             borderRadius: 0,
-            width: 'auto',
-            height: 'auto',
+            width: 40,
+            height: 40,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: 44,
-            marginRight: 0,
+            fontSize: 28,
+            margin: 0,
             cursor: 'pointer',
             boxShadow: 'none',
             transition: 'color 0.2s',
@@ -145,7 +147,56 @@ const ProjectPage: React.FC = () => {
           }}
           title="Add agent"
         >
-          <Plus size={44} strokeWidth={2.2} color="var(--color-accent)" />
+          <Plus size={28} strokeWidth={2.2} color="var(--color-accent)" />
+        </button>
+        <button
+          className="agent-tab tab-switcher"
+          style={{
+            background: 'none',
+            color: 'var(--color-accent)',
+            border: 'none',
+            borderRadius: 0,
+            width: 40,
+            height: 40,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 28,
+            margin: 0,
+            cursor: 'pointer',
+            boxShadow: 'none',
+            transition: 'color 0.2s',
+            padding: 0,
+            outline: 'none',
+          }}
+          title="Switch agent tab"
+        >
+          <List size={28} strokeWidth={2.2} color="var(--color-accent)" />
+        </button>
+        <button
+          className="agent-tab grid-toggle"
+          onClick={() => setShowGrid(g => !g)}
+          style={{
+            background: 'none',
+            color: 'var(--color-accent)',
+            border: 'none',
+            borderRadius: 0,
+            width: 40,
+            height: 40,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 28,
+            margin: 0,
+            cursor: 'pointer',
+            boxShadow: 'none',
+            transition: 'color 0.2s',
+            padding: 0,
+            outline: 'none',
+          }}
+          title="Toggle agent grid/single view"
+        >
+          <LayoutGrid size={28} strokeWidth={2.2} color="var(--color-accent)" />
         </button>
       </nav>
     </div>
