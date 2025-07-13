@@ -87,29 +87,49 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
         pointerEvents: 'none',
       }} />
       <div style={{ position: 'relative', zIndex: 1 }}>
-        <header className="dashboard-header">
-          <div className="header-content" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-            <button
-              className="circle-icon-btn"
-              onClick={toggleTheme}
-              title="Toggle light/dark mode"
-              style={{ position: 'absolute', left: 0 }}
-            >
-              {theme === 'dark' ? '🌞' : '🌙'}
-            </button>
-            <h1 style={{ margin: 0, fontWeight: 700, fontSize: 24, display: 'flex', alignItems: 'center', gap: 8 }}>
-              🌱touchgrass
+        <header className="dashboard-header" style={{
+          background: 'transparent',
+          border: 'none',
+          boxShadow: 'none',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          zIndex: 10,
+        }}>
+          <div className="header-content" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', background: 'none', boxShadow: 'none', border: 'none' }}>
+            <h1 className="touchgrass-logo" style={{ margin: 0, fontWeight: 700, fontSize: 24, display: 'flex', alignItems: 'center', gap: 8, background: 'none' }}>
+              touchgrass
             </h1>
-            <button
-              className="circle-icon-btn"
-              onClick={onLogout}
-              title="Logout"
-              style={{ position: 'absolute', right: 0 }}
-            >
-              <LogOut size={18} color="var(--color-accent)" />
-            </button>
           </div>
         </header>
+        {/* Floating logout button (bottom right) */}
+        <button
+          className="circle-icon-btn"
+          onClick={onLogout}
+          title="Logout"
+          style={{
+            position: 'fixed',
+            right: 18,
+            bottom: 18,
+            zIndex: 100,
+            background: 'var(--color-bg-alt)',
+            border: '1.5px solid var(--color-border)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+            width: 44,
+            height: 44,
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 22,
+            color: 'var(--color-accent)',
+            outline: 'none',
+            cursor: 'pointer',
+          }}
+        >
+          <LogOut size={18} color="var(--color-accent)" />
+        </button>
         <main className="dashboard-main">
           <div className="dashboard-content">
             {projects.length === 0 ? (
@@ -119,9 +139,19 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                 textAlign: 'center',
                 padding: 0
               }}>
-                <h2 style={{ fontWeight: 800, fontSize: 32, marginBottom: 10 }}>Welcome</h2>
-                <div style={{ color: 'var(--color-text-muted)', fontSize: 18, marginBottom: 8 }}>You have no projects yet.</div>
-                <div style={{ color: 'var(--color-text-muted)', fontSize: 15, marginBottom: 28 }}>Please import your project from GitHub so that the agents can start working on it.</div>
+                <h2 style={{
+                  fontWeight: 600, // was 700
+                  fontSize: 40,
+                  margin: '48px 0 12px 0',
+                  textAlign: 'center',
+                  letterSpacing: '-0.01em',
+                }}>
+                  Welcome
+                </h2>
+                <div style={{ color: 'var(--color-text-muted)', fontSize: 15, marginBottom: 28 }}>
+                  you have no projects yet. 
+                  import your github project & continue building from your phone
+                </div>
                 <form className="repo-form" onSubmit={handleAddProject}>
                   <input
                     type="url"
@@ -132,7 +162,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                     required
                     style={{ border: '1.5px solid #d1d5db', background: 'var(--color-input-bg)', color: 'var(--color-text)' }}
                   />
-                  <button type="submit" className="repo-add-btn">Open Project</button>
+                  <button type="submit" className="repo-add-btn">Start Touching Grass</button>
                 </form>
                 {error && <div className="error-message">{error}</div>}
               </div>
@@ -149,7 +179,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                       onChange={e => setRepoUrl(e.target.value)}
                       required
                     />
-                    <button type="submit" className="repo-add-btn">Open Project</button>
+                    <button type="submit" className="repo-add-btn">Start Touching Grass</button>
                   </form>
                 </div>
                 <div className="projects-grid">

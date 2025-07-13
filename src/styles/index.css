@@ -82,6 +82,34 @@
   font-style: italic;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Symphony Pro';
+  src: url('../assets/fonts/symphony-pro-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Safira March';
+  src: url('../assets/fonts/Safira March Personal Use Only.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Voyage';
+  src: url('../assets/fonts/voyage.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Coax Regular';
+  src: url('../assets/fonts/Coax-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* Reset and base styles */
 * {
@@ -568,4 +596,12 @@ body, .app {
   height: 36px !important;
   box-shadow: none !important;
   border-radius: 8px;
+} 
+
+.touchgrass-logo {
+  font-family: 'Coax Regular', 'Voyage', 'Symphony Pro', 'Cera Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif !important;
+  font-size: 2.2rem !important;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  font-variant-caps: small-caps;
 } 
