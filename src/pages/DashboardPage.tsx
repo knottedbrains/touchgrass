@@ -110,8 +110,8 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
           justifyContent: 'center',
           paddingTop: 24,
         }}>
-          <h1 className="touchgrass-logo" style={{ margin: 0, fontWeight: 700, fontSize: 17, letterSpacing: '0.04em', color: '#fff', fontFamily: 'Cera Pro, sans-serif', textTransform: 'lowercase' }}>
-            🌱touchgrass
+          <h1 className="touchgrass-logo" style={{ margin: 0, fontWeight: 700, fontSize: 17, letterSpacing: '0.04em', color: '#fff', fontFamily: 'Cera Pro, sans-serif', fontVariant: 'small-caps', display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ fontSize: 22, lineHeight: 1, marginRight: 2 }}>🌱</span>touchgrass
           </h1>
         </header>
         {/* Floating logout button (bottom right) */}
@@ -154,7 +154,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
             {activeTab === 'projects' && (
               projects.length === 0 ? (
                 <div style={{
-                  maxWidth: 420,
+                  maxWidth: 400,
                   margin: '80px auto 0 auto',
                   textAlign: 'center',
                   padding: 0
@@ -170,10 +170,9 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                     Welcome
                   </h2>
                   <div style={{ color: '#E7DCC9', fontSize: 15, marginBottom: 28 }}>
-                    you have no projects yet. 
-                    import your github project & continue building from your phone
+                    import your github project &<br />continue building from your phone
                   </div>
-                  <form className="repo-form" onSubmit={handleAddProject}>
+                  <form className="repo-form" onSubmit={handleAddProject} style={{ width: '80vw', maxWidth: 520, display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center' }}>
                     <input
                       type="url"
                       className="repo-input"
@@ -181,9 +180,42 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                       value={repoUrl}
                       onChange={e => setRepoUrl(e.target.value)}
                       required
-                      style={{ border: '1.5px solid #d1d5db', background: 'var(--color-input-bg)', color: 'var(--color-text)', fontFamily: 'Cera Pro, sans-serif' }}
+                      style={{
+                        background: '#E7DCC9',
+                        color: '#8C7C63',
+                        fontFamily: 'Cera Pro, sans-serif',
+                        border: 'none',
+                        borderRadius: 8,
+                        padding: '12px 16px',
+                        fontSize: 15,
+                        outline: 'none',
+                        boxShadow: 'none',
+                        width: '100%',
+                        height: 48,
+                        marginBottom: 0
+                      }}
                     />
-                    <button type="submit" className="repo-add-btn" style={{ color: '#23272f' }}>Clone</button>
+                    <style>{`
+                      .repo-input::placeholder {
+                        font-size: 13px !important;
+                        color: #b3a78f !important;
+                      }
+                    `}</style>
+                    <button type="submit" className="repo-add-btn" style={{
+                      background: '#E7DCC9',
+                      color: '#23272f',
+                      border: 'none',
+                      borderRadius: 8,
+                      fontWeight: 700,
+                      fontSize: 18,
+                      width: '100%',
+                      height: 48,
+                      marginTop: 0,
+                      fontFamily: 'Cera Pro, sans-serif',
+                      boxShadow: 'none',
+                      transition: 'background 0.2s',
+                      padding: 0
+                    }}>Clone</button>
                   </form>
                   {error && <div className="error-message">{error}</div>}
                 </div>
@@ -192,7 +224,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                   <div style={{ maxWidth: 520, width: '100%', margin: '0 auto', textAlign: 'left', marginBottom: 8 }}>
                     <h2 style={{ color: '#fff', fontWeight: 700, fontSize: 22, margin: '0 0 6px 0', fontFamily: 'Cera Pro, sans-serif', letterSpacing: '0.01em', textAlign: 'left' }}>Import new project</h2>
                   </div>
-                  <div style={{ maxWidth: 520, width: '100%', margin: '0 auto', display: 'flex', gap: 12, marginBottom: 10 }}>
+                  <form className="repo-form" onSubmit={handleAddProject} style={{ width: '80vw', maxWidth: 520, display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center', marginBottom: 10 }}>
                     <input
                       type="url"
                       className="repo-input"
@@ -200,11 +232,43 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                       value={repoUrl}
                       onChange={e => setRepoUrl(e.target.value)}
                       required
-                      style={{ fontFamily: 'Cera Pro, sans-serif', flex: 1 }}
+                      style={{
+                        background: '#E7DCC9',
+                        color: '#8C7C63',
+                        fontFamily: 'Cera Pro, sans-serif',
+                        border: 'none',
+                        borderRadius: 8,
+                        padding: '12px 16px',
+                        fontSize: 15,
+                        outline: 'none',
+                        boxShadow: 'none',
+                        width: '100%',
+                        height: 48,
+                        marginBottom: 0
+                      }}
                     />
-                    <button type="submit" className="repo-add-btn" style={{ color: '#23272f', minWidth: 110, fontWeight: 700, fontSize: 18, padding: '0 18px' }}>Clone</button>
-                  </div>
-                  <style>{`.repo-add-btn { color: #23272f !important; }`}</style>
+                    <style>{`
+                      .repo-input::placeholder {
+                        font-size: 13px !important;
+                        color: #b3a78f !important;
+                      }
+                    `}</style>
+                    <button type="submit" className="repo-add-btn" style={{
+                      background: '#E7DCC9',
+                      color: '#23272f',
+                      border: 'none',
+                      borderRadius: 8,
+                      fontWeight: 700,
+                      fontSize: 18,
+                      width: '100%',
+                      height: 48,
+                      marginTop: 0,
+                      fontFamily: 'Cera Pro, sans-serif',
+                      boxShadow: 'none',
+                      transition: 'background 0.2s',
+                      padding: 0
+                    }}>Clone</button>
+                  </form>
                   <div style={{ maxWidth: 520, width: '100%', margin: '0 auto', textAlign: 'left', marginBottom: 4 }}>
                     <h2 style={{ margin: '8px 0 4px 0', fontWeight: 700, fontSize: 22, color: '#fff', fontFamily: 'Cera Pro, sans-serif', letterSpacing: '0.01em', textAlign: 'left' }}>Your Projects</h2>
                   </div>
@@ -264,15 +328,16 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
               )
             )}
             {activeTab === 'account' && (
-              <div style={{ maxWidth: 420, margin: '80px auto 0 auto', textAlign: 'center', padding: 0 }}>
-                <h2 style={{ fontWeight: 600, fontSize: 32, margin: '48px 0 12px 0', color: '#fff' }}>Account</h2>
-                <form style={{ display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'stretch', boxShadow: 'none', border: 'none', maxWidth: 320, margin: '0 auto' }}>
+              <div style={{ maxWidth: 520, width: '100%', margin: '0 auto', textAlign: 'left', padding: 0, marginTop: 88 }}>
+                <h2 style={{ fontWeight: 600, fontSize: 32, margin: '48px 0 12px 0', color: '#fff', textAlign: 'left', fontFamily: 'Cera Pro, sans-serif' }}>Account</h2>
+                <form style={{ display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'stretch', boxShadow: 'none', border: 'none', maxWidth: 520, width: '100%', margin: '0 auto' }}>
                   <label style={{ color: '#E7DCC9', fontWeight: 600, fontSize: 14, textAlign: 'left', marginBottom: 4, fontFamily: 'Cera Pro, sans-serif' }}>Name</label>
-                  <input type="text" defaultValue="Rachie" style={{ width: '100%', background: '#fff', color: '#232e25', fontFamily: 'Cera Pro, sans-serif', fontWeight: 600, fontSize: 16, border: '1.5px solid #cbbfae', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }} />
+                  <input type="text" defaultValue="Rachie" style={{ width: '100%', background: '#E7DCC9', color: '#8C7C63', fontFamily: 'Cera Pro, sans-serif', fontWeight: 400, fontSize: 16, border: 'none', borderRadius: 8, padding: '12px 16px', marginBottom: 8, outline: 'none', boxShadow: 'none', transition: 'background 0.2s' }} />
                   <label style={{ color: '#E7DCC9', fontWeight: 600, fontSize: 14, textAlign: 'left', marginBottom: 4, fontFamily: 'Cera Pro, sans-serif' }}>Username</label>
-                  <input type="text" defaultValue="rachie" style={{ width: '100%', background: '#fff', color: '#232e25', fontFamily: 'Cera Pro, sans-serif', fontWeight: 400, fontSize: 15, border: '1.5px solid #cbbfae', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }} />
+                  <input type="text" defaultValue="rachie" style={{ width: '100%', background: '#E7DCC9', color: '#8C7C63', fontFamily: 'Cera Pro, sans-serif', fontWeight: 400, fontSize: 16, border: 'none', borderRadius: 8, padding: '12px 16px', marginBottom: 8, outline: 'none', boxShadow: 'none', transition: 'background 0.2s' }} />
                   <label style={{ color: '#E7DCC9', fontWeight: 600, fontSize: 14, textAlign: 'left', marginBottom: 4, fontFamily: 'Cera Pro, sans-serif' }}>Email</label>
-                  <input type="email" defaultValue="rachie@email.com" style={{ width: '100%', background: '#fff', color: '#232e25', fontFamily: 'Cera Pro, sans-serif', fontWeight: 400, fontSize: 15, border: '1.5px solid #cbbfae', borderRadius: 8, padding: '10px 12px' }} />
+                  <input type="email" defaultValue="rachie@email.com" style={{ width: '100%', background: '#E7DCC9', color: '#8C7C63', fontFamily: 'Cera Pro, sans-serif', fontWeight: 400, fontSize: 16, border: 'none', borderRadius: 8, padding: '12px 16px', outline: 'none', boxShadow: 'none', transition: 'background 0.2s' }} />
+                  <button type="submit" className="repo-add-btn" style={{ marginTop: 18, fontWeight: 700, fontSize: 18, padding: '14px 0', borderRadius: 8, background: '#E7DCC9', color: '#232e25', border: 'none', fontFamily: 'Cera Pro, sans-serif', boxShadow: 'none', transition: 'background 0.2s', width: '100%' }}>Save</button>
                 </form>
               </div>
             )}
