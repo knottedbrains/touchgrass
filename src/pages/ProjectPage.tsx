@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useTheme } from '../App'
+import { ArrowLeft, Plus } from 'lucide-react'
 
 interface Agent {
   id: string
@@ -8,26 +9,21 @@ interface Agent {
 }
 
 const getReadmeUrl = (repoUrl: string) => {
-  // Try to get the README preview for the repo
-  // e.g. https://github.com/user/repo -> https://github.com/user/repo#readme
   if (!repoUrl.includes('github.com')) return repoUrl
   return repoUrl + '#readme'
 }
 
 const ProjectPage: React.FC = () => {
-  console.log('ProjectPage loaded')
-  const { id } = useParams()
+  const { id: projectId } = useParams()
   const navigate = useNavigate()
   const { theme } = useTheme()
 
-  // For demo, just use localStorage or session for project info
-  // In real app, fetch project by id
   const [project] = useState(() => {
     const allProjects = JSON.parse(localStorage.getItem('projects') || '[]')
-    return allProjects.find((p: any) => String(p.id) === String(id)) || null
+    return allProjects.find((p: any) => String(p.id) === String(projectId)) || null
   })
 
-  // Agent state
+  // Start with one agent by default
   const [agents, setAgents] = useState<Agent[]>([
     { id: '1', name: 'Agent 1' }
   ])
@@ -52,7 +48,7 @@ const ProjectPage: React.FC = () => {
     return (
       <div style={{ color: 'red', padding: 40 }}>
         <h2>Project not found</h2>
-        <div>Project ID: {id}</div>
+        <div>Project ID: {projectId}</div>
         <button onClick={() => navigate('/dashboard')} className="logout-button" style={{ marginTop: 24 }}>← Back to Dashboard</button>
       </div>
     )
@@ -62,28 +58,54 @@ const ProjectPage: React.FC = () => {
     <div className="project-workspace" style={{ minHeight: '100vh', background: 'var(--color-bg)' }}>
       <header className="dashboard-header">
         <div className="header-content">
-          <button onClick={() => navigate('/dashboard')} className="logout-button" style={{ marginRight: 16 }}>← Back</button>
+          <button onClick={() => navigate('/dashboard')} className="logout-button" style={{ marginRight: 10, width: 32, height: 32, borderRadius: '50%', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18 }} title="Back to dashboard">
+            <ArrowLeft size={18} color="var(--color-accent)" />
+          </button>
           <h1 style={{ flex: 1 }}>{project.name}</h1>
         </div>
       </header>
-      <main className="workspace-main" style={{ paddingBottom: 80, paddingTop: 24 }}>
-        <div className="workspace-preview" style={{ height: '60vh', borderRadius: 12, overflow: 'hidden', boxShadow: 'var(--color-shadow)', background: 'var(--color-card)' }}>
-          {project.repoUrl ? (
-            <iframe
-              src={getReadmeUrl(project.repoUrl)}
-              title="Project Preview"
-              style={{ width: '100%', height: '100%', border: 'none', background: 'var(--color-card)' }}
-            />
-          ) : (
-            <div style={{ padding: 32, color: 'var(--color-text-muted)' }}>No project found.</div>
-          )}
-        </div>
-        <div className="agent-content" style={{ marginTop: 32, minHeight: 120, background: 'var(--color-card)', borderRadius: 12, boxShadow: 'var(--color-shadow)', padding: 24 }}>
-          <h2 style={{ color: 'var(--color-text)', fontWeight: 600, fontSize: '1.2rem', marginBottom: 12 }}>{agents.find(a => a.id === selectedAgent)?.name}</h2>
-          <div style={{ color: 'var(--color-text-muted)' }}>
-            {/* Placeholder for agent-specific content */}
-            This is the workspace for <b>{agents.find(a => a.id === selectedAgent)?.name}</b>. Here you can show agent chat, actions, or logs.
-          </div>
+      <main className="workspace-main" style={{ paddingBottom: 80, paddingTop: 24, paddingLeft: 40, paddingRight: 40 }}>
+        <div className="agents-grid" style={{
+          display: 'grid',
+          gridTemplateColumns: agents.length > 1 ? '1fr 1fr' : '1fr',
+          gridTemplateRows: agents.length > 2 ? '1fr 1fr' : '1fr',
+          gap: 24,
+          maxWidth: 1200,
+          margin: '0 auto',
+        }}>
+          {agents.map(agent => (
+            <div
+              key={agent.id}
+              className="agent-preview-card"
+              style={{
+                background: 'var(--color-card)',
+                borderRadius: 12,
+                boxShadow: 'var(--color-shadow)',
+                padding: 0,
+                overflow: 'hidden',
+                cursor: 'pointer',
+                border: '1.5px solid var(--color-accent-light)',
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: 260,
+                transition: 'box-shadow 0.2s, border 0.2s',
+              }}
+              onClick={() => navigate(`/project/${projectId}/agent/${agent.id}`)}
+              tabIndex={0}
+              role="button"
+            >
+              <div style={{ padding: '12px 18px', borderBottom: '1px solid var(--color-border)', fontWeight: 600, color: 'var(--color-accent)', fontSize: 18 }}>
+                {agent.name}
+              </div>
+              <div style={{ flex: 1, minHeight: 180, background: 'var(--color-bg)' }}>
+                <iframe
+                  src={getReadmeUrl(project.repoUrl)}
+                  title={`Preview for ${agent.name}`}
+                  style={{ width: '100%', height: '100%', border: 'none', background: 'var(--color-card)' }}
+                />
+              </div>
+            </div>
+          ))}
         </div>
       </main>
       <nav className="agent-bar" style={{
@@ -98,58 +120,31 @@ const ProjectPage: React.FC = () => {
         padding: '0 12px',
         height: 64,
         zIndex: 50,
-        boxShadow: '0 -2px 12px rgba(0,0,0,0.06)'
+        boxShadow: 'none'
       }}>
-        {agents.map(agent => (
-          <div
-            key={agent.id}
-            className={selectedAgent === agent.id ? 'agent-tab active' : 'agent-tab'}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              background: selectedAgent === agent.id ? 'var(--color-card)' : 'transparent',
-              color: 'var(--color-text)',
-              borderRadius: 8,
-              marginRight: 8,
-              padding: '8px 18px',
-              fontWeight: 500,
-              fontSize: 16,
-              cursor: 'pointer',
-              boxShadow: selectedAgent === agent.id ? 'var(--color-shadow)' : 'none',
-              border: selectedAgent === agent.id ? '1.5px solid var(--color-primary)' : '1.5px solid transparent',
-              transition: 'all 0.2s',
-              position: 'relative',
-            }}
-            onClick={() => setSelectedAgent(agent.id)}
-          >
-            {agent.name}
-            {agents.length > 1 && (
-              <span
-                style={{ marginLeft: 10, color: 'var(--color-error-text)', fontWeight: 700, cursor: 'pointer', fontSize: 18 }}
-                onClick={e => { e.stopPropagation(); closeAgent(agent.id) }}
-                title="Close agent"
-              >×</span>
-            )}
-          </div>
-        ))}
         <button
           className="agent-tab add-agent"
           onClick={addAgent}
           style={{
-            background: 'var(--color-primary)',
-            color: '#fff',
+            background: 'none',
+            color: 'var(--color-accent)',
             border: 'none',
-            borderRadius: 8,
-            padding: '8px 18px',
-            fontWeight: 700,
-            fontSize: 20,
-            marginLeft: 4,
+            borderRadius: 0,
+            width: 'auto',
+            height: 'auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 44,
+            marginRight: 0,
             cursor: 'pointer',
-            boxShadow: 'var(--color-shadow)',
-            transition: 'background 0.2s',
+            boxShadow: 'none',
+            transition: 'color 0.2s',
+            padding: 0,
           }}
           title="Add agent"
-        >+
+        >
+          <Plus size={44} strokeWidth={2.2} />
         </button>
       </nav>
     </div>

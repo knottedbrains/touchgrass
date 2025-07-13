@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '../App'
+import { LogOut, Trash } from 'lucide-react'
 
 interface DashboardPageProps {
   onLogout: () => void
@@ -59,36 +60,53 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
     navigate(`/project/${id}`)
   }
 
+  const handleDeleteProject = (e: React.MouseEvent, id: string) => {
+    e.stopPropagation()
+    if (window.confirm('Are you sure you want to delete this project? This action cannot be undone.')) {
+      setProjects(projects.filter(project => project.id !== id))
+    }
+  }
+
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
-        <div className="header-content" style={{ position: 'relative' }}>
-          <h1>🌱touchgrass</h1>
-          <div style={{ display: 'flex', alignItems: 'center', position: 'absolute', right: 0, top: 0, height: '100%' }}>
-            <button
-              className="circle-icon-btn"
-              onClick={onLogout}
-              title="Logout"
-              style={{ marginRight: 10 }}
-            >
-              <span role="img" aria-label="logout" style={{ fontSize: 20 }}>🔒</span>
-            </button>
-            <button
-              className="circle-icon-btn"
-              onClick={toggleTheme}
-              title="Toggle light/dark mode"
-            >
-              {theme === 'dark' ? '🌞' : '🌙'}
-            </button>
-          </div>
+        <div className="header-content" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+          <button
+            className="circle-icon-btn"
+            onClick={toggleTheme}
+            title="Toggle light/dark mode"
+            style={{ position: 'absolute', left: 0 }}
+          >
+            {theme === 'dark' ? '🌞' : '🌙'}
+          </button>
+          <h1 style={{ margin: 0, fontWeight: 700, fontSize: 24, display: 'flex', alignItems: 'center', gap: 8 }}>
+            🌱touchgrass
+          </h1>
+          <button
+            className="circle-icon-btn"
+            onClick={onLogout}
+            title="Logout"
+            style={{ position: 'absolute', right: 0 }}
+          >
+            <LogOut size={18} color="var(--color-accent)" />
+          </button>
         </div>
       </header>
       <main className="dashboard-main">
         <div className="dashboard-content">
           {projects.length === 0 ? (
-            <div className="empty-state">
-              <h2>Welcome! You have no projects yet.</h2>
-              <p className="empty-desc">Paste a public GitHub repository URL below to open your first project.</p>
+            <div className="empty-state" style={{
+              maxWidth: 420,
+              margin: '80px auto 0 auto',
+              textAlign: 'center',
+              background: 'none',
+              border: 'none',
+              boxShadow: 'none',
+              padding: 0
+            }}>
+              <h2 style={{ fontWeight: 800, fontSize: 32, marginBottom: 10 }}>Welcome</h2>
+              <div style={{ color: 'var(--color-text-muted)', fontSize: 18, marginBottom: 8 }}>You have no projects yet.</div>
+              <div style={{ color: 'var(--color-text-muted)', fontSize: 15, marginBottom: 28 }}>Please import your project from GitHub so that the agents can start working on it.</div>
               <form className="repo-form" onSubmit={handleAddProject}>
                 <input
                   type="url"
@@ -97,6 +115,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                   value={repoUrl}
                   onChange={e => setRepoUrl(e.target.value)}
                   required
+                  style={{ border: '1.5px solid #d1d5db', background: 'var(--color-input-bg)', color: 'var(--color-text)' }}
                 />
                 <button type="submit" className="repo-add-btn">Open Project</button>
               </form>
@@ -126,7 +145,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                     onClick={() => handleProjectClick(project.id)}
                     tabIndex={0}
                     role="button"
-                    style={{ cursor: 'pointer' }}
+                    style={{ cursor: 'pointer', position: 'relative' }}
                   >
                     <div className="project-info">
                       <div className="project-icon">📁</div>
@@ -137,6 +156,36 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onLogout }) => {
                         </a>
                       </div>
                     </div>
+                    <button
+                      onClick={(e) => handleDeleteProject(e, project.id)}
+                      style={{
+                        position: 'absolute',
+                        top: 12,
+                        right: 12,
+                        background: 'none',
+                        border: 'none',
+                        color: 'var(--color-text-muted)',
+                        cursor: 'pointer',
+                        padding: 6,
+                        borderRadius: '50%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        transition: 'all 0.2s',
+                        opacity: 0.6,
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.opacity = '1'
+                        e.currentTarget.style.color = 'var(--color-accent)'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.opacity = '0.6'
+                        e.currentTarget.style.color = 'var(--color-text-muted)'
+                      }}
+                      title="Delete project"
+                    >
+                      <Trash size={16} />
+                    </button>
                   </div>
                 ))}
               </div>

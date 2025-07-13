@@ -3,6 +3,7 @@ import LoginPage from './pages/LoginPage'
 import DashboardPage from './pages/DashboardPage'
 import { useState, useEffect, createContext, useContext } from 'react'
 import ProjectPage from './pages/ProjectPage'
+import AgentPage from './pages/AgentPage'
 
 // Theme context
 const ThemeContext = createContext({
@@ -83,6 +84,14 @@ function App() {
             element={
               isAuthenticated ? 
                 <ProjectPage /> : 
+                <Navigate to="/login" replace />
+            } 
+          />
+          <Route 
+            path="/project/:projectId/agent/:agentId" 
+            element={
+              isAuthenticated ? 
+                <AgentPage /> : 
                 <Navigate to="/login" replace />
             } 
           />
